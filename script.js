@@ -10,24 +10,25 @@ async function carregarResenhas() {
     }
 }
 
+// Atualiza o banner de acordo com a categoria
 function atualizarBanner(categoria) {
     const banner = document.getElementById("banner-destaques");
-    if (!banner) return; // evita erro se não existir
+    if (!banner) return;
+    
+    // Se estiver em modo foco, mantém escondido
+    if (document.body.classList.contains('modo-foco')) {
+        banner.style.display = 'none';
+        return;
+    }
+
     banner.style.display = categoria === "todas" ? "block" : "none";
 }
 
-// Ao carregar a página
-let categoriaAtual = document.body.dataset.categoria || 'todas';
-atualizarBanner(categoriaAtual);
-
-// Ao clicar nos links do menu
-document.querySelectorAll('nav a[data-categoria]').forEach(link => {
-    link.addEventListener('click', (e) => {
-        e.preventDefault();
-        categoriaAtual = link.dataset.categoria || 'todas';
-        atualizarBanner(categoriaAtual);
-    });
-});
+// Função para fechar o modo foco
+function fecharResenha() {
+    document.body.classList.remove('modo-foco');
+    document.getElementById('resenha-detalhe').style.display = 'none';
+}
 
 // Função para exibir resenhas no HTML
 function exibirResenhas(resenhas, categoria = 'todas') {
@@ -50,35 +51,30 @@ function exibirResenhas(resenhas, categoria = 'todas') {
         `;
         container.appendChild(section);
 
-// Clique para abrir resenha em modo foco
-section.addEventListener('click', () => {
-    document.body.classList.add('modo-foco');
-    const detalhe = document.getElementById('conteudo-detalhe');
-    detalhe.innerHTML = `
-        <h2>${item.titulo}</h2>
-        <p><strong>Autor:</strong> ${item.autor}</p>
-        <p>${item.textoCompleto}</p>
-    `;
-    document.getElementById('resenha-detalhe').style.display = 'block';
+        // Clique para abrir resenha em modo foco
+        section.addEventListener('click', () => {
+            document.body.classList.add('modo-foco');
+            const detalhe = document.getElementById('conteudo-detalhe');
+            detalhe.innerHTML = `
+                <h2>${item.titulo}</h2>
+                <p><strong>Autor:</strong> ${item.autor}</p>
+                <p>${item.textoCompleto}</p>
+            `;
+            document.getElementById('resenha-detalhe').style.display = 'block';
 
-    // Adiciona histórico para botão voltar do navegador
-    history.pushState({modoFoco: true}, '', '');
-});
-});
+            // Adiciona histórico para botão Voltar do navegador
+            history.pushState({modoFoco: true}, '', '');
+        });
+    });
 }
 
-document.getElementById('fechar-resenha').addEventListener('click', () => {
-    document.body.classList.remove('modo-foco');
-    document.getElementById('resenha-detalhe').style.display = 'none';
-});
-
-// Função principal
+// Inicializa o site
 async function init() {
     const resenhas = await carregarResenhas();
 
-    // Determina categoria inicial a partir do body ou usa 'todas'
     let categoriaAtual = document.body?.dataset?.categoria || 'todas';
 
+    // Exibe resenhas iniciais
     exibirResenhas(resenhas, categoriaAtual);
 
     // Filtrar por categoria ao clicar no menu
@@ -94,9 +90,29 @@ async function init() {
             // Atualiza categoria e exibe resenhas
             categoriaAtual = link.dataset.categoria || 'todas';
             exibirResenhas(resenhas, categoriaAtual);
+            atualizarBanner(categoriaAtual);
         });
     });
+
+    // Botão “Voltar” interno
+    const btnFechar = document.getElementById('fechar-resenha');
+    if (btnFechar) {
+        btnFechar.addEventListener('click', () => {
+            fecharResenha();
+            if (history.state?.modoFoco) history.back();
+        });
+    }
+
+    // Botão Voltar do navegador
+    window.addEventListener('popstate', () => {
+        if (document.body.classList.contains('modo-foco')) {
+            fecharResenha();
+        }
+    });
+
+    // Atualiza banner na inicialização
+    atualizarBanner(categoriaAtual);
 }
 
-// Inicializa o site quando o DOM estiver pronto
+// Inicializa quando DOM estiver pronto
 document.addEventListener("DOMContentLoaded", init);
