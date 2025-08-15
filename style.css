@@ -49,7 +49,7 @@ nav a:hover {
 body.modo-foco header,
 body.modo-foco #banner-destaques,
 body.modo-foco #resenhas {
-    display: none; /* Esconde cabeçalho, banner e lista de resenhas */
+    display: none !important; /* Esconde cabeçalho, banner e lista de resenhas */
 }
 
 #resenha-detalhe {
