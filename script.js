@@ -1,28 +1,15 @@
-// Função para carregar as resenhas do JSON
-async function carregarResenhas() {
-    try {
-        const response = await fetch('resenhas.json');
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.error('Erro ao carregar resenhas:', error);
-        return [];
-    }
-}
-
-// Função para exibir ou ocultar o banner
+// Função para exibir ou ocultar o banner de destaques
 function atualizarBanner(categoria) {
     const banner = document.getElementById("banner-destaques");
-    if (categoria === "todas") {
-        banner.style.display = "block";
-    } else {
-        banner.style.display = "none";
-    }
+    if (!banner) return; // evita erros se o banner não existir
+    banner.style.display = categoria === "todas" ? "block" : "none";
 }
 
 // Função para exibir resenhas no HTML
 function exibirResenhas(resenhas, categoria = 'todas') {
     const container = document.getElementById('resenhas');
+    if (!container) return;
+
     container.innerHTML = '';
 
     const filtradas = categoria === 'todas'
@@ -45,31 +32,29 @@ function exibirResenhas(resenhas, categoria = 'todas') {
 async function init() {
     const resenhas = await carregarResenhas();
 
-    // Exibe resenhas iniciais da categoria atual
-    let categoriaAtual = document.body.dataset.categoria || 'todas';
+    // Determina categoria inicial a partir do body ou usa 'todas'
+    let categoriaAtual = document.body?.dataset?.categoria || 'todas';
+
     exibirResenhas(resenhas, categoriaAtual);
     atualizarBanner(categoriaAtual);
 
     // Filtrar por categoria ao clicar no menu
-    document.querySelectorAll('nav a').forEach(link => {
+    const linksMenu = document.querySelectorAll('nav a[data-categoria]');
+    linksMenu.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
 
-            // Remove classe 'ativo' de todos os links
-            document.querySelectorAll('nav a').forEach(l => l.classList.remove('ativo'));
-
-            // Marca o link clicado como ativo
+            // Atualiza link ativo visualmente
+            linksMenu.forEach(l => l.classList.remove('ativo'));
             link.classList.add('ativo');
 
-            // Atualiza categoria com base no link
+            // Atualiza categoria e aplica mudanças
             categoriaAtual = link.dataset.categoria || 'todas';
-
-            // Exibe resenhas e atualiza banner
             exibirResenhas(resenhas, categoriaAtual);
             atualizarBanner(categoriaAtual);
         });
     });
 }
 
-// Inicializa o site
+// Inicializa o site quando o DOM estiver pronto
 document.addEventListener("DOMContentLoaded", init);
