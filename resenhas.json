@@ -1,14 +1,14 @@
 [
     {
         "titulo": "Livro Exemplo 1",
-        "autor": "Autor Fictício",
+        "autor": "Autor",
         "categoria": "Clássicos",
-        "resumo": "Este é um livro de terror clássico que explora o sobrenatural com suspense intenso."
+        "resumo": "Resumo Exemplo 1."
     },
     {
         "titulo": "Livro Exemplo 2",
-        "autor": "Outro Autor",
+        "autor": "Autor",
         "categoria": "Lançamentos",
-        "resumo": "Um lançamento recente que mistura horror psicológico com uma narrativa envolvente."
+        "resumo": "Resumo Exemplo 2."
     }
 ]
