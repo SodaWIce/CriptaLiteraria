@@ -1,8 +1,13 @@
-// Função para exibir ou ocultar o banner de destaques
-function atualizarBanner(categoria) {
-    const banner = document.getElementById("banner-destaques");
-    if (!banner) return; // evita erros se o banner não existir
-    banner.style.display = categoria === "todas" ? "block" : "none";
+// Função para carregar as resenhas do JSON
+async function carregarResenhas() {
+    try {
+        const response = await fetch('resenhas.json');
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Erro ao carregar resenhas:', error);
+        return [];
+    }
 }
 
 // Função para exibir resenhas no HTML
@@ -36,7 +41,6 @@ async function init() {
     let categoriaAtual = document.body?.dataset?.categoria || 'todas';
 
     exibirResenhas(resenhas, categoriaAtual);
-    atualizarBanner(categoriaAtual);
 
     // Filtrar por categoria ao clicar no menu
     const linksMenu = document.querySelectorAll('nav a[data-categoria]');
@@ -48,10 +52,9 @@ async function init() {
             linksMenu.forEach(l => l.classList.remove('ativo'));
             link.classList.add('ativo');
 
-            // Atualiza categoria e aplica mudanças
+            // Atualiza categoria e exibe resenhas
             categoriaAtual = link.dataset.categoria || 'todas';
             exibirResenhas(resenhas, categoriaAtual);
-            atualizarBanner(categoriaAtual);
         });
     });
 }
