@@ -10,6 +10,17 @@ async function carregarResenhas() {
     }
 }
 
+document.addEventListener("DOMContentLoaded", function() {
+    const banner = document.getElementById("banner-destaques");
+    const categoriaAtual = document.querySelector('[data-categoria]').dataset.categoria;
+
+    if (categoriaAtual === "todas") {
+        banner.style.display = "block";
+    } else {
+        banner.style.display = "none";
+    }
+});
+
 // Função para exibir resenhas no HTML
 function exibirResenhas(resenhas, categoria = 'todas') {
     const container = document.getElementById('resenhas');
