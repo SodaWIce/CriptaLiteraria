@@ -10,16 +10,15 @@ async function carregarResenhas() {
     }
 }
 
-document.addEventListener("DOMContentLoaded", function() {
+// Função para exibir ou ocultar o banner
+function atualizarBanner(categoria) {
     const banner = document.getElementById("banner-destaques");
-    const categoriaAtual = document.querySelector('[data-categoria]').dataset.categoria;
-
-    if (categoriaAtual === "todas") {
+    if (categoria === "todas") {
         banner.style.display = "block";
     } else {
         banner.style.display = "none";
     }
-});
+}
 
 // Função para exibir resenhas no HTML
 function exibirResenhas(resenhas, categoria = 'todas') {
@@ -45,17 +44,32 @@ function exibirResenhas(resenhas, categoria = 'todas') {
 // Função principal
 async function init() {
     const resenhas = await carregarResenhas();
-    exibirResenhas(resenhas);
+
+    // Exibe resenhas iniciais da categoria atual
+    let categoriaAtual = document.body.dataset.categoria || 'todas';
+    exibirResenhas(resenhas, categoriaAtual);
+    atualizarBanner(categoriaAtual);
 
     // Filtrar por categoria ao clicar no menu
     document.querySelectorAll('nav a').forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
-            const categoria = link.getAttribute('data-categoria');
-            exibirResenhas(resenhas, categoria);
+
+            // Remove classe 'ativo' de todos os links
+            document.querySelectorAll('nav a').forEach(l => l.classList.remove('ativo'));
+
+            // Marca o link clicado como ativo
+            link.classList.add('ativo');
+
+            // Atualiza categoria com base no link
+            categoriaAtual = link.dataset.categoria || 'todas';
+
+            // Exibe resenhas e atualiza banner
+            exibirResenhas(resenhas, categoriaAtual);
+            atualizarBanner(categoriaAtual);
         });
     });
 }
 
 // Inicializa o site
-init();
+document.addEventListener("DOMContentLoaded", init);
