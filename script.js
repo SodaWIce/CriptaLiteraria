@@ -34,24 +34,34 @@ function exibirResenhas(resenhas, categoria = 'todas') {
 // Função principal
 async function init() {
     const resenhas = await carregarResenhas();
+    
+    // Exibe todas as resenhas inicialmente
     exibirResenhas(resenhas);
+
+    // Atualiza banner inicialmente para categoria 'todas'
+    atualizarBanner('todas');
 
     // Filtrar por categoria ao clicar no menu
     document.querySelectorAll('nav a').forEach(link => {
         link.addEventListener('click', (e) => {
-    e.preventDefault(); // impede recarregamento da página
-    const categoria = link.getAttribute('data-categoria');
+            e.preventDefault(); // impede recarregamento da página
+            const categoria = link.getAttribute('data-categoria');
 
-    // Mostrar ou esconder banner
+            // Mostrar ou esconder banner
+            atualizarBanner(categoria);
+
+            // Atualiza resenhas
+            exibirResenhas(resenhas, categoria);
+        });
+    });
+}
+
+// Função para mostrar/esconder banner
+function atualizarBanner(categoria) {
     const banner = document.getElementById('banner-destaques');
-    if(banner) {
+    if (banner) {
         banner.style.display = categoria === 'todas' ? 'block' : 'none';
     }
-
-    // Atualiza resenhas
-    exibirResenhas(resenhas, categoria);
-});
-    });
 }
 
 // Inicializa o site
