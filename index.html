@@ -7,22 +7,25 @@
     <meta name="description" content="Site de resenhas literárias focado em livros de terror. Descubra clássicos e lançamentos do gênero.">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body data-categoria="todas">
     <header>
         <h1>CRIPTA LITERÁRIA</h1>
         <nav>
-            <a href="#" data-categoria="todas">Início</a>
-            <a href="#" data-categoria="Clássicos">Clássicos</a>
-            <a href="#" data-categoria="Lançamentos">Lançamentos</a>
-            <a href="#" data-categoria="Autores Nacionais">Autores Nacionais</a>
+            <a href="#" class="ativo">Início</a>
+            <a href="#">Clássicos</a>
+            <a href="#">Lançamentos</a>
+            <a href="#">Autores Nacionais</a>
         </nav>
     </header>
 
-<div id="banner-destaques" style="display: none;">
-    <p>🎉 Destaques da categoria "Todas"</p>
-</div>
+    <!-- Banner de destaques, aparece apenas na categoria "todas" -->
+    <div id="banner-destaques" style="display: none;">
+        <p>🎉 Destaques da categoria "Todas"</p>
+    </div>
 
-    <main id="resenhas"></main>
+    <main id="resenhas">
+        <!-- Conteúdo das resenhas -->
+    </main>
 
     <footer>
         &copy; 2025 Resenhas de Terror | Desenvolvido por Soda
