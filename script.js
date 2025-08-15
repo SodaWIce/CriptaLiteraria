@@ -41,6 +41,9 @@ async function init() {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             const categoria = link.getAttribute('data-categoria');
+
+document.getElementById('banner-destaques').style.display = categoria === 'todas' ? 'block' : 'none';
+
             exibirResenhas(resenhas, categoria);
         });
     });
