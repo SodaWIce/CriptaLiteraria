@@ -46,6 +46,22 @@ nav a:hover {
     transition: opacity 0.3s ease;
 }
 
+body.modo-foco header,
+body.modo-foco #banner-destaques,
+body.modo-foco #resenhas {
+    display: none; /* Esconde cabeçalho, banner e lista de resenhas */
+}
+
+#resenha-detalhe {
+    padding: 2em;
+    background-color: #fff;
+    color: #000;
+}
+
+#resenha-detalhe button {
+    margin-bottom: 1em;
+}
+
 /* Conteúdo principal */
 main {
     padding: 1em;
