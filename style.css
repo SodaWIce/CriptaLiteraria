@@ -2,16 +2,17 @@
 body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
-    background-color: #111111; /* fundo escuro consistente */
+    background-color: #0d1116; /* fundo escuro principal */
     color: #f2f2f2; /* texto claro */
     transition: background-color 0.3s, color 0.3s;
 }
 
 /* Cabeçalho */
 header {
-    background-color: #141820;
+    background-color: #1c1c28; /* tom mais quente que o footer */
     padding: 1em;
     text-align: center;
+    border-bottom: 2px solid #2a2a3a;
 }
 
 /* Menu */
@@ -25,25 +26,24 @@ nav {
 
 nav a {
     color: #f2f2f2;
-    text-decoration: none;
+    text-decoration: none; /* remove sublinhado padrão */
     margin: 0.5em 0;
     transition: color 0.2s, transform 0.2s;
 }
 
 nav a:hover {
-    color: #ff4d4d; /* destaque vermelho rubi */
-    text-decoration: underline;
+    color: #c75c5c; /* vermelho rubi mais suave */
     transform: scale(1.05);
 }
 
 /* Banner de destaques */
 #banner-destaques {
-    background-color: #141820; 
+    background-color: #1c1c28; /* combinando com header */
     color: #f2f2f2;
     padding: 1em;
     text-align: center;
     font-size: 1.1em;
-    border-bottom: 1px solid #2a2a2a;
+    border-bottom: 1px solid #2a2a3a;
     border-radius: 8px 8px 0 0;
     transition: opacity 0.3s ease;
 }
@@ -65,12 +65,12 @@ main {
 
 .resenha:hover {
     transform: translateY(-5px);
-    box-shadow: 0 0 20px rgba(255, 77, 77, 0.5); /* sombra rubi */
+    box-shadow: 0 0 20px rgba(199, 92, 92, 0.5); /* sombra rubi suave */
 }
 
 .resenha h2 {
     margin: 0.2em 0;
-    color: #ff4d4d; /* vermelho-terror */
+    color: #c75c5c; /* vermelho rubi mais suave */
 }
 
 .resenha p {
@@ -79,8 +79,8 @@ main {
 
 /* Footer */
 footer {
-    background-color: #141820;
-    color: #888;
+    background-color: #1c1c28; /* mesmo tom do header */
+    color: #bbb; /* tom mais claro, menos frio */
     text-align: center;
     padding: 1em;
     margin-top: 2em;
