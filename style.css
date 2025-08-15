@@ -61,6 +61,24 @@ body.modo-foco #resenhas {
     display: none !important; /* Esconde cabeçalho, banner e lista de resenhas */
 }
 
+/* Quando o modo foco está ativo */
+body.modo-foco {
+    background-color: #111111; /* fundo escuro principal */
+    color: #f2f2f2;           /* texto claro */
+    display: flex;            /* centralização vertical/horizontal */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;        /* ocupa altura total da tela */
+    margin: 0;
+}
+
+/* Centraliza itens de título e autor */
+body.modo-foco .item.titulo,
+body.modo-foco .item.autor {
+    text-align: center; /* alinha texto no centro */
+}
+
 #resenha-detalhe {
     padding: 2em;
     background-color: #fff;
