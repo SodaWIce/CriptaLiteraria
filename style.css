@@ -2,9 +2,17 @@
 body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
-    background: radial-gradient(circle at center, #C8A2C8, #FFD966, #89CFF0);
+    background: linear-gradient(135deg, #C8A2C8 40%, #D9B3FF 25%, #FFD966 15%, #89CFF0 20%);
+    background-size: 400% 400%;
+    animation: ondasSuaves 20s ease infinite;
     color: #f2f2f2; /* texto claro */
     transition: background-color 0.3s, color 0.3s;
+}
+
+@keyframes ondasSuaves {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 /* Cabeçalho */
