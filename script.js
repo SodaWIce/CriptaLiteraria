@@ -49,8 +49,25 @@ function exibirResenhas(resenhas, categoria = 'todas') {
             <p>${item.resumo}</p>
         `;
         container.appendChild(section);
+
+// Clique para abrir resenha em modo foco
+section.addEventListener('click', () => {
+    document.body.classList.add('modo-foco'); // aplica modo foco no CSS
+    const detalhe = document.getElementById('conteudo-detalhe');
+    detalhe.innerHTML = `
+        <h2>${item.titulo}</h2>
+        <p><strong>Autor:</strong> ${item.autor}</p>
+        <p>${item.textoCompleto}</p>
+    `;
+    document.getElementById('resenha-detalhe').style.display = 'block';
+});
     });
 }
+
+document.getElementById('fechar-resenha').addEventListener('click', () => {
+    document.body.classList.remove('modo-foco');
+    document.getElementById('resenha-detalhe').style.display = 'none';
+});
 
 // Função principal
 async function init() {
