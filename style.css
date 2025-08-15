@@ -2,8 +2,9 @@
 body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
-    background-color: #0d1116;
-    color: #f2f2f2;
+    background-color: #111111; /* fundo escuro consistente */
+    color: #f2f2f2; /* texto claro */
+    transition: background-color 0.3s, color 0.3s;
 }
 
 /* Cabeçalho */
@@ -26,21 +27,25 @@ nav a {
     color: #f2f2f2;
     text-decoration: none;
     margin: 0.5em 0;
-    transition: color 0.2s;
+    transition: color 0.2s, transform 0.2s;
 }
 
 nav a:hover {
-    color: #ff4d4d; /* destaque vermelho */
+    color: #ff4d4d; /* destaque vermelho rubi */
     text-decoration: underline;
+    transform: scale(1.05);
 }
 
+/* Banner de destaques */
 #banner-destaques {
-    background-color: #141820; /* tom frio */
+    background-color: #141820; 
     color: #f2f2f2;
     padding: 1em;
     text-align: center;
     font-size: 1.1em;
     border-bottom: 1px solid #2a2a2a;
+    border-radius: 8px 8px 0 0;
+    transition: opacity 0.3s ease;
 }
 
 /* Conteúdo principal */
@@ -50,17 +55,17 @@ main {
 
 /* Cartões de resenha */
 .resenha {
-    background-color: #2a2a2a;
-    border-radius: 8px;
+    background-color: #1a1a1a; /* fundo escuro leve */
+    border-radius: 10px;
     padding: 1.5em;
     margin-bottom: 1.5em;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .resenha:hover {
     transform: translateY(-5px);
-    box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+    box-shadow: 0 0 20px rgba(255, 77, 77, 0.5); /* sombra rubi */
 }
 
 .resenha h2 {
@@ -96,4 +101,9 @@ footer {
     .resenha p {
         font-size: 0.95em;
     }
+}
+
+/* Transições gerais para hover/focus em botões e links */
+a, button {
+    transition: transform 0.2s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
