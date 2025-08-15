@@ -39,13 +39,18 @@ async function init() {
     // Filtrar por categoria ao clicar no menu
     document.querySelectorAll('nav a').forEach(link => {
         link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const categoria = link.getAttribute('data-categoria');
+    e.preventDefault(); // impede recarregamento da página
+    const categoria = link.getAttribute('data-categoria');
 
-document.getElementById('banner-destaques').style.display = categoria === 'todas' ? 'block' : 'none';
+    // Mostrar ou esconder banner
+    const banner = document.getElementById('banner-destaques');
+    if(banner) {
+        banner.style.display = categoria === 'todas' ? 'block' : 'none';
+    }
 
-            exibirResenhas(resenhas, categoria);
-        });
+    // Atualiza resenhas
+    exibirResenhas(resenhas, categoria);
+});
     });
 }
 
