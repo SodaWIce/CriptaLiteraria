@@ -10,6 +10,25 @@ async function carregarResenhas() {
     }
 }
 
+function atualizarBanner(categoria) {
+    const banner = document.getElementById("banner-destaques");
+    if (!banner) return; // evita erro se não existir
+    banner.style.display = categoria === "todas" ? "block" : "none";
+}
+
+// Ao carregar a página
+let categoriaAtual = document.body.dataset.categoria || 'todas';
+atualizarBanner(categoriaAtual);
+
+// Ao clicar nos links do menu
+document.querySelectorAll('nav a[data-categoria]').forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        categoriaAtual = link.dataset.categoria || 'todas';
+        atualizarBanner(categoriaAtual);
+    });
+});
+
 // Função para exibir resenhas no HTML
 function exibirResenhas(resenhas, categoria = 'todas') {
     const container = document.getElementById('resenhas');
