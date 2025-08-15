@@ -12,7 +12,6 @@ header {
     background-color: #1A1A1A; /* tom mais quente que o footer */
     padding: 1em;
     text-align: center;
-    border-bottom: 2px solid #111111;
 }
 
 header h1 {
