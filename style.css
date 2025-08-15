@@ -40,6 +40,7 @@ main {
 }
 
 #banner-destaques {
+    display: none; /* começa escondido */
     background-color: #141820; /* tom frio */
     color: #f2f2f2;
     padding: 1em;
