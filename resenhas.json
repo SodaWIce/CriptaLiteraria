@@ -4,20 +4,90 @@
         "autor": "Bram Stoker",
         "categoria": "Clássicos",
         "resumo": "Um romance gótico sobre o lendário vampiro.",
-        "textoCompleto": "Drácula é uma obra-prima do terror gótico, explorando temas de medo e sedução..."
+        "textoCompleto": "Drácula é uma obra-prima do terror gótico, explorando temas de medo, sedução e o desconhecido. A narrativa epistolar de Bram Stoker, com cartas e diários, cria uma atmosfera densa, enquanto o Conde Drácula, com sua presença magnética, personifica o mal ancestral. A luta de Van Helsing e seus aliados contra o vampiro é tanto um confronto físico quanto filosófico, abordando questões de moralidade e espiritualidade."
     },
     {
         "titulo": "A Casa dos Pesadelos",
         "autor": "Autor Nacional",
         "categoria": "Autores Nacionais",
         "resumo": "Uma história arrepiante de uma casa amaldiçoada.",
-        "textoCompleto": "Este livro mergulha o leitor em uma narrativa de suspense psicológico..."
+        "textoCompleto": "Este livro mergulha o leitor em uma narrativa de suspense psicológico, onde uma família se muda para uma mansão antiga no interior do Brasil, apenas para descobrir segredos sombrios escondidos em suas paredes. O autor, com uma prosa envolvente, mistura folclore brasileiro com terror gótico, criando uma experiência que é ao mesmo tempo local e universalmente assustadora."
     },
     {
         "titulo": "O Chamado do Monstro",
         "autor": "Novo Autor",
         "categoria": "Lançamentos",
         "resumo": "Um lançamento de 2025 que mistura terror e fantasia.",
-        "textoCompleto": "Uma obra inovadora que redefine o gênero de terror..."
+        "textoCompleto": "Uma obra inovadora que redefine o gênero de terror, 'O Chamado do Monstro' apresenta um jovem que ouve vozes de uma criatura ancestral em seus sonhos. Publicado em 2025, este livro combina elementos de fantasia sombria com uma narrativa psicológica, explorando o limite entre sanidade e loucura. A escrita de Novo Autor é visceral, com descrições que evocam arrepios."
+    },
+    {
+        "titulo": "Frankenstein",
+        "autor": "Mary Shelley",
+        "categoria": "Clássicos",
+        "resumo": "A trágica história de um cientista e sua criação.",
+        "textoCompleto": "Frankenstein, de Mary Shelley, é um marco do romantismo e do terror gótico. A história de Victor Frankenstein e sua criatura, rejeitada pela sociedade, explora temas de ambição, isolamento e humanidade. A prosa de Shelley é rica e evocativa, com paisagens sombrias que refletem o tormento interno dos personagens. Um clássico que continua relevante."
+    },
+    {
+        "titulo": "O Morro dos Ventos Uivantes",
+        "autor": "Emily Brontë",
+        "categoria": "Clássicos",
+        "resumo": "Um romance de paixão e vingança nas charnecas inglesas.",
+        "textoCompleto": "Emily Brontë cria uma narrativa intensa e sombria em 'O Morro dos Ventos Uivantes'. A história de Heathcliff e Catherine, marcada por amor obsessivo e vingança, é contada em uma estrutura não linear que amplifica o impacto emocional. As paisagens desoladas e a atmosfera gótica tornam este clássico uma leitura inesquecível."
+    },
+    {
+        "titulo": "Sombras do Sertão",
+        "autor": "Clara Mendes",
+        "categoria": "Autores Nacionais",
+        "resumo": "Um suspense gótico ambientado no sertão brasileiro.",
+        "textoCompleto": "Clara Mendes traz uma história envolvente que mistura o folclore do sertão com elementos góticos. 'Sombras do Sertão' segue uma jovem que retorna à sua cidade natal e descobre segredos macabros ligados à sua família. A escrita é poética, com descrições vívidas do calor opressivo e das lendas locais, criando um suspense que prende até a última página."
+    },
+    {
+        "titulo": "A Noiva do Corvo",
+        "autor": "Lucas Almeida",
+        "categoria": "Autores Nacionais",
+        "resumo": "Uma história de amor sombria com toques sobrenaturais.",
+        "textoCompleto": "Em 'A Noiva do Corvo', Lucas Almeida explora um romance gótico com elementos sobrenaturais. Uma jovem noiva descobre que seu noivo está ligado a uma maldição ancestral envolvendo um corvo misterioso. A narrativa é rica em simbolismo, com uma atmosfera densa que remete aos contos de Edgar Allan Poe, mas com um toque brasileiro autêntico."
+    },
+    {
+        "titulo": "Ecos do Abismo",
+        "autor": "Sofia Carneiro",
+        "categoria": "Lançamentos",
+        "resumo": "Um thriller psicológico de 2025 sobre memórias fragmentadas.",
+        "textoCompleto": "Lançado em 2025, 'Ecos do Abismo' é um thriller psicológico que explora a mente de uma mulher que acorda sem memórias em uma mansão abandonada. Sofia Carneiro usa uma narrativa não linear para criar suspense, com reviravoltas que desafiam a percepção do leitor. A atmosfera gótica e o ritmo acelerado tornam esta obra um destaque do ano."
+    },
+    {
+        "titulo": "O Retrato de Dorian Gray",
+        "autor": "Oscar Wilde",
+        "categoria": "Clássicos",
+        "resumo": "Um conto de vaidade e corrupção moral.",
+        "textoCompleto": "Oscar Wilde entrega uma obra-prima em 'O Retrato de Dorian Gray', onde a busca pela beleza eterna leva o protagonista a um caminho de decadência. A prosa elegante e os diálogos afiados contrastam com a crescente escuridão da narrativa, tornando este romance gótico um estudo fascinante sobre moralidade e estética."
+    },
+    {
+        "titulo": "Luz Negra",
+        "autor": "Mariana Costa",
+        "categoria": "Autores Nacionais",
+        "resumo": "Um romance de terror ambientado em uma cidade costeira.",
+        "textoCompleto": "Mariana Costa cria uma narrativa arrepiante em 'Luz Negra', onde uma cidade costeira brasileira é assolada por fenômenos inexplicáveis após a descoberta de um farol abandonado. A autora combina terror psicológico com elementos do folclore marítimo, criando uma história que é ao mesmo tempo local e universalmente assustadora."
+    },
+    {
+        "titulo": "A Sombra do Farol",
+        "autor": "João Pereira",
+        "categoria": "Autores Nacionais",
+        "resumo": "Um mistério gótico sobre um farol amaldiçoado.",
+        "textoCompleto": "Em 'A Sombra do Farol', João Pereira mergulha o leitor em um mistério gótico ambientado em uma ilha isolada no litoral brasileiro. A história segue um guardião de farol que descobre segredos sombrios ligados à sua família. A prosa densa e as descrições atmosféricas criam um suspense envolvente."
+    },
+    {
+        "titulo": "O Véu da Meia-Noite",
+        "autor": "Beatriz Lima",
+        "categoria": "Lançamentos",
+        "resumo": "Um romance gótico de 2025 sobre segredos familiares.",
+        "textoCompleto": "Lançado em 2025, 'O Véu da Meia-Noite' é uma história gótica que explora segredos de uma família aristocrática em decadência. Beatriz Lima usa uma prosa rica e evocativa para construir uma narrativa de traição e redenção, com uma mansão assombrada como pano de fundo. Um destaque para fãs do gênero."
+    },
+    {
+        "titulo": "Carmilla",
+        "autor": "Sheridan Le Fanu",
+        "categoria": "Clássicos",
+        "resumo": "Uma história de vampirismo e sedução.",
+        "textoCompleto": "Publicado antes de 'Drácula', 'Carmilla' de Sheridan Le Fanu é uma novela gótica que explora o vampirismo com uma protagonista feminina enigmática. A relação entre Carmilla e Laura é carregada de tensão e ambiguidade, com uma atmosfera de suspense que influenciou o gênero de terror. Uma leitura essencial para fãs de gótico."
     }
 ]
