@@ -1,10 +1,3 @@
-// Dados do banner (personalizáveis)
-const bannerData = [
-    { image: 'destaque1.jpg', title: '', text: '' },
-    { image: 'placeholder2.jpg', title: 'Destaque 2', text: 'Um lançamento arrepiante de 2025.' },
-    { image: 'placeholder3.jpg', title: 'Destaque 3', text: 'Obra-prima de um autor nacional.' }
-];
-
 // Função para carregar as resenhas do JSON
 async function carregarResenhas() {
     try {
@@ -25,7 +18,7 @@ async function carregarResenhas() {
 function atualizarBanner(categoria) {
     const banner = document.getElementById('banner-destaques');
     if (!banner) {
-        console.warn('Elemento #banner-destaques não encontrado'); // Debug
+        console.warn('Elemento #banner-destaques não encontrado');
         return;
     }
 
@@ -36,49 +29,123 @@ function atualizarBanner(categoria) {
 
     banner.classList.remove('hidden');
     const slides = document.querySelectorAll('.banner-slide');
+    const indicatorsContainer = document.querySelector('.banner-indicators');
     if (slides.length === 0) {
-        console.warn('Nenhum .banner-slide encontrado'); // Debug
+        console.warn('Nenhum .banner-slide encontrado');
+        return;
+    }
+
+    if (!indicatorsContainer) {
+        console.warn('Elemento .banner-indicators não encontrado');
         return;
     }
 
     let currentSlide = 0;
+    let isDragging = false;
+    let startPos = 0;
+    let currentTranslate = 0;
+    let prevTranslate = 0;
 
-    function showSlide(index) {
-        slides.forEach((slide, i) => {
-            slide.classList.toggle('active', i === index);
+    // Limpar indicadores existentes
+    indicatorsContainer.innerHTML = '';
+
+    // Criar bolinhas dinamicamente
+    slides.forEach((_, index) => {
+        const indicator = document.createElement('div');
+        indicator.classList.add('banner-indicator');
+        if (index === 0) indicator.classList.add('active');
+        indicator.addEventListener('click', () => {
+            clearInterval(autoSlide);
+            goToSlide(index);
+            autoSlide = setInterval(nextSlide, 5000);
         });
+        indicatorsContainer.appendChild(indicator);
+    });
+
+    const indicators = document.querySelectorAll('.banner-indicator');
+
+    // Função para atualizar a posição dos indicadores
+    function updateIndicatorsPosition() {
+        const activeSlide = document.querySelector('.banner-slide.active');
+        const wrapper = activeSlide.querySelector('.banner-image-wrapper');
+        if (wrapper && indicatorsContainer) {
+            wrapper.appendChild(indicatorsContainer);
+        } else {
+            console.warn('Elemento .banner-image-wrapper não encontrado no slide ativo');
+        }
     }
 
+    // Função para mudar o slide
+    function goToSlide(index) {
+        slides[currentSlide].classList.remove('active');
+        indicators[currentSlide].classList.remove('active');
+        currentSlide = (index + slides.length) % slides.length;
+        slides[currentSlide].classList.add('active');
+        indicators[currentSlide].classList.add('active');
+        updateIndicatorsPosition(); // Atualizar posição das bolinhas
+    }
+
+    // Função para próximo slide
     function nextSlide() {
-        currentSlide = (currentSlide + 1) % slides.length;
-        showSlide(currentSlide);
+        goToSlide(currentSlide + 1);
     }
 
-    // Auto-rotaciona a cada 8 segundos
-    let autoSlide = setInterval(nextSlide, 8000);
+    // Auto-rotaciona a cada 5 segundos
+    let autoSlide = setInterval(nextSlide, 5000);
 
-    // Controles manuais
-    const prevButton = document.querySelector('.banner-prev');
-    const nextButton = document.querySelector('.banner-next');
-    if (prevButton) {
-        prevButton.addEventListener('click', () => {
-            clearInterval(autoSlide);
-            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-            showSlide(currentSlide);
-            autoSlide = setInterval(nextSlide, 5000);
-        });
-    } else {
-        console.warn('Botão .banner-prev não encontrado'); // Debug
+    // Funções para arrastar
+    function startDrag(event) {
+        isDragging = true;
+        startPos = getPositionX(event);
+        banner.style.cursor = 'grabbing';
+        clearInterval(autoSlide);
     }
-    if (nextButton) {
-        nextButton.addEventListener('click', () => {
-            clearInterval(autoSlide);
-            nextSlide();
-            autoSlide = setInterval(nextSlide, 5000);
-        });
-    } else {
-        console.warn('Botão .banner-next não encontrado'); // Debug
+
+    function drag(event) {
+        if (isDragging) {
+            const currentPosition = getPositionX(event);
+            currentTranslate = prevTranslate + currentPosition - startPos;
+        }
     }
+
+    function endDrag() {
+        if (!isDragging) return;
+        isDragging = false;
+        banner.style.cursor = 'grab';
+        const movedBy = currentTranslate - prevTranslate;
+
+        // Determinar direção do arrasto
+        if (movedBy < -100 && currentSlide < slides.length - 1) {
+            goToSlide(currentSlide + 1);
+        } else if (movedBy > 100 && currentSlide > 0) {
+            goToSlide(currentSlide - 1);
+        }
+        currentTranslate = 0;
+        prevTranslate = 0;
+        autoSlide = setInterval(nextSlide, 5000);
+    }
+
+    function getPositionX(event) {
+        return event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
+    }
+
+    // Eventos para arrastar
+    banner.addEventListener('mousedown', startDrag);
+    banner.addEventListener('mousemove', drag);
+    banner.addEventListener('mouseup', endDrag);
+    banner.addEventListener('mouseleave', endDrag);
+    banner.addEventListener('touchstart', startDrag);
+    banner.addEventListener('touchmove', drag);
+    banner.addEventListener('touchend', endDrag);
+
+    // Pausar autoplay ao interagir
+    banner.addEventListener('mouseenter', () => clearInterval(autoSlide));
+    banner.addEventListener('mouseleave', () => {
+        autoSlide = setInterval(nextSlide, 5000);
+    });
+
+    // Inicializar posição das bolinhas
+    updateIndicatorsPosition();
 }
 
 // Função para fechar o modo foco
@@ -88,16 +155,16 @@ function fecharResenha() {
     if (resenhaDetalhe) {
         resenhaDetalhe.classList.add('hidden');
     } else {
-        console.warn('Elemento #resenha-detalhe não encontrado'); // Debug
+        console.warn('Elemento #resenha-detalhe não encontrado');
     }
-    window.scrollTo({ top: 0, behavior: 'smooth' }); // Garante que volta ao topo
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // Função para exibir resenhas no HTML
 function exibirResenhas(resenhas, categoria = 'todas') {
     const container = document.getElementById('resenhas');
     if (!container) {
-        console.warn('Elemento #resenhas não encontrado'); // Debug
+        console.warn('Elemento #resenhas não encontrado');
         return;
     }
 
@@ -108,7 +175,7 @@ function exibirResenhas(resenhas, categoria = 'todas') {
         : resenhas.filter(r => r.categoria === categoria);
 
     if (filtradas.length === 0) {
-        console.warn('Nenhuma resenha encontrada para a categoria:', categoria); // Debug
+        console.warn('Nenhuma resenha encontrada para a categoria:', categoria);
         container.innerHTML = '<p>Nenhuma resenha disponível.</p>';
         return;
     }
@@ -124,7 +191,6 @@ function exibirResenhas(resenhas, categoria = 'todas') {
         `;
         container.appendChild(section);
 
-        // Clique para abrir resenha em modo foco
         section.addEventListener('click', () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
             document.body.classList.add('modo-foco');
@@ -136,7 +202,7 @@ function exibirResenhas(resenhas, categoria = 'todas') {
                     <p>${item.textoCompleto}</p>
                 `;
             } else {
-                console.warn('Elemento #conteudo-detalhe não encontrado'); // Debug
+                console.warn('Elemento #conteudo-detalhe não encontrado');
             }
             const resenhaDetalhe = document.getElementById('resenha-detalhe');
             if (resenhaDetalhe) {
@@ -145,7 +211,6 @@ function exibirResenhas(resenhas, categoria = 'todas') {
             history.pushState({ modoFoco: true }, '', '');
         });
 
-        // Suporte para teclado
         section.addEventListener('keypress', (e) => {
             if (e.key === 'Enter' || e.key === ' ') {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -166,19 +231,17 @@ function debounce(func, wait) {
 
 // Inicializa o site
 async function init() {
-    // Força scroll para o topo na inicialização da página
     window.scrollTo({ top: 0, behavior: 'auto' });
 
     const resenhas = await carregarResenhas();
     let categoriaAtual = document.body.dataset.categoria || 'todas';
 
-    // Exibe resenhas iniciais
     exibirResenhas(resenhas, categoriaAtual);
+    atualizarBanner(categoriaAtual);
 
-    // Filtrar por categoria
     const linksMenu = document.querySelectorAll('nav a[data-categoria]');
     if (linksMenu.length === 0) {
-        console.warn('Nenhum link de menu com data-categoria encontrado'); // Debug
+        console.warn('Nenhum link de menu com data-categoria encontrado');
     }
     linksMenu.forEach(link => {
         link.addEventListener('click', debounce((e) => {
@@ -193,7 +256,6 @@ async function init() {
         }, 200));
     });
 
-    // Botão “Voltar” interno
     const btnFechar = document.getElementById('fechar-resenha');
     if (btnFechar) {
         btnFechar.addEventListener('click', debounce(() => {
@@ -201,18 +263,14 @@ async function init() {
             if (history.state?.modoFoco) history.back();
         }, 200));
     } else {
-        console.warn('Botão #fechar-resenha não encontrado'); // Debug
+        console.warn('Botão #fechar-resenha não encontrado');
     }
 
-    // Botão Voltar do navegador
     window.addEventListener('popstate', () => {
         if (document.body.classList.contains('modo-foco')) {
             fecharResenha();
         }
     });
-
-    // Atualiza banner na inicialização
-    atualizarBanner(categoriaAtual);
 }
 
 // Inicializa quando DOM estiver pronto
