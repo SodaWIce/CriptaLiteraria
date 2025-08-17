@@ -55,16 +55,15 @@ header {
     text-align: center;
     box-shadow: var(--shadow);
     width: 100%;
-    border-radius: var(--border-radius);
-    border: 3px solid var(--primary-color); /* Thick cartoon outline */
     animation: bounceIn 0.8s ease;
+    /* Removed border-radius and border for full-width effect */
 }
 
 header .logo {
     max-height: 60px;
     width: auto;
     transition: var(--transition);
-    border: 2px solid var(--primary-color); /* Cartoonish border */
+    border: 2px solid var(--primary-color); /* Keep cartoonish border for logo */
     border-radius: 10px;
 }
 
@@ -76,7 +75,7 @@ nav ul {
     display: flex;
     justify-content: center;
     gap: 1rem;
-    flex-wrap: wrap;
+    flex-wrap: nowrap; /* Ensure horizontal alignment without wrapping */
     padding: 0.8rem 0.5rem;
     max-width: 100%;
     box-sizing: border-box;
@@ -85,7 +84,7 @@ nav ul {
 }
 
 nav a {
-    color: var(--secondary-color);
+    color: var(--primary-color); /* Text color matches button background */
     text-decoration: none;
     font-family: 'Comic Neue', sans-serif;
     font-size: 1.2rem;
@@ -102,7 +101,6 @@ nav a:hover, nav a.ativo {
     color: var(--secondary-color);
     background: var(--primary-color);
     transform: scale(1.1); /* Bouncy hover */
-    border-bottom: none; /* Remove gothic underline */
 }
 
 /* Banner Carrossel */
@@ -114,8 +112,7 @@ nav a:hover, nav a.ativo {
     background: var(--section-bg);
     display: none;
     animation: bounceIn 0.8s ease;
-    border: 3px solid var(--primary-color); /* Cartoon outline */
-    border-radius: var(--border-radius);
+    /* Removed border and border-radius for full-width effect */
 }
 
 .banner-carousel:not(.hidden) {
@@ -140,16 +137,16 @@ nav a:hover, nav a.ativo {
     height: 300px;
     object-fit: cover;
     margin-bottom: 1.2rem;
-    border: 3px solid var(--primary-color); /* Thick cartoon border */
+    border: 3px solid var(--primary-color); /* Keep cartoon border for images */
     border-radius: var(--border-radius);
 }
 
 .banner-title {
-    font-family: 'Bangers', sans-serif; /* Bold, cartoonish font */
+    font-family: 'Bangers', sans-serif;
     font-size: 2.5rem;
     color: var(--primary-color);
     margin-bottom: 0.6rem;
-    text-shadow: 2px 2px 0 var(--secondary-color); /* Cartoon text outline */
+    text-shadow: 2px 2px 0 var(--secondary-color);
 }
 
 .banner-text {
@@ -184,7 +181,7 @@ nav a:hover, nav a.ativo {
 .banner-prev:hover, .banner-next:hover {
     background: var(--secondary-color);
     color: var(--primary-color);
-    transform: scale(1.2); /* Exaggerated bounce */
+    transform: scale(1.2);
 }
 
 /* Modo Foco */
@@ -196,15 +193,15 @@ body.modo-foco #resenhas {
 
 #resenha-detalhe {
     padding: 2.5rem 1rem;
-    background: var(--section-bg);
+    background: var(--bg-color); /* Full background fill with #EDE6D7 */
     color: var(--text-color);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     animation: bounceIn 0.5s ease;
-    border: 3px solid var(--primary-color);
-    border-radius: var(--border-radius);
+    width: 100%; /* Ensure full width */
+    /* Removed border and border-radius for seamless background */
 }
 
 #resenha-detalhe.hidden {
@@ -227,7 +224,7 @@ body.modo-foco #resenhas {
 #fechar-resenha:hover {
     background: var(--secondary-color);
     color: var(--primary-color);
-    transform: scale(1.15); /* Bouncy hover */
+    transform: scale(1.15);
 }
 
 #conteudo-detalhe {
@@ -263,7 +260,7 @@ main {
     background: var(--section-bg);
     padding: 2rem;
     margin-bottom: 1.2rem;
-    border: 3px solid var(--primary-color); /* Thick cartoon border */
+    border: 3px solid var(--primary-color);
     border-radius: var(--border-radius);
     transition: var(--transition);
     cursor: pointer;
@@ -273,7 +270,7 @@ main {
 
 .resenha:hover, .resenha:focus {
     background: var(--section-hover-bg);
-    transform: scale(1.05); /* Exaggerated scaling */
+    transform: scale(1.05);
     box-shadow: var(--shadow);
 }
 
@@ -303,8 +300,7 @@ footer {
     font-size: 1rem;
     margin-top: 2.5rem;
     box-shadow: var(--shadow);
-    border: 3px solid var(--primary-color);
-    border-radius: var(--border-radius);
+    /* Removed border and border-radius for full-width effect */
 }
 
 /* Responsividade */
@@ -388,6 +384,7 @@ footer {
     nav ul {
         gap: 0.5rem;
         padding: 0.5rem 0.5rem;
+        flex-wrap: wrap; /* Allow wrapping on very small screens */
     }
 
     nav a {
