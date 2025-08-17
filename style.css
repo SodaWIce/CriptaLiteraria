@@ -88,7 +88,6 @@ nav a {
     padding: 0.5rem 1rem;
     min-width: max-content;
     transition: var(--transition);
-    border: 2px solid var(--primary-color);
     border-radius: var(--border-radius);
     background: var(--section-bg);
 }
