@@ -372,7 +372,7 @@ body.modo-foco #resenhas {
 /* Resenhas */
 main {
     max-width: 1200px;
-    margin: 2.5rem auto;
+    margin: 1.5rem auto;
     padding: 0 1rem;
 }
 
@@ -477,12 +477,12 @@ footer {
 
     nav ul {
         gap: 0.5rem;
-        padding: 0.5rem 0.5rem;
+        padding: 0.3rem 0.5rem;
         flex-wrap: wrap;
     }
 
     nav a {
-        font-size: 0.9rem;
+        font-size: 0.7rem;
         padding: 0.3rem 0.6rem;
     }
 
