@@ -9,7 +9,11 @@ const bannerData = [
 async function carregarResenhas() {
     try {
         const response = await fetch('resenhas.json');
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
         const data = await response.json();
+        console.log('Resenhas carregadas:', data); // Debug: Verifica os dados
         return data;
     } catch (error) {
         console.error('Erro ao carregar resenhas:', error);
@@ -20,7 +24,10 @@ async function carregarResenhas() {
 // Função para atualizar o carrossel de banner
 function atualizarBanner(categoria) {
     const banner = document.getElementById('banner-destaques');
-    if (!banner) return;
+    if (!banner) {
+        console.warn('Elemento #banner-destaques não encontrado'); // Debug
+        return;
+    }
 
     if (document.body.classList.contains('modo-foco') || categoria !== 'todas') {
         banner.classList.add('hidden');
@@ -29,6 +36,11 @@ function atualizarBanner(categoria) {
 
     banner.classList.remove('hidden');
     const slides = document.querySelectorAll('.banner-slide');
+    if (slides.length === 0) {
+        console.warn('Nenhum .banner-slide encontrado'); // Debug
+        return;
+    }
+
     let currentSlide = 0;
 
     function showSlide(index) {
@@ -46,37 +58,60 @@ function atualizarBanner(categoria) {
     let autoSlide = setInterval(nextSlide, 8000);
 
     // Controles manuais
-    document.querySelector('.banner-prev').addEventListener('click', () => {
-        clearInterval(autoSlide);
-        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-        showSlide(currentSlide);
-        autoSlide = setInterval(nextSlide, 5000);
-    });
-
-    document.querySelector('.banner-next').addEventListener('click', () => {
-        clearInterval(autoSlide);
-        nextSlide();
-        autoSlide = setInterval(nextSlide, 5000);
-    });
+    const prevButton = document.querySelector('.banner-prev');
+    const nextButton = document.querySelector('.banner-next');
+    if (prevButton) {
+        prevButton.addEventListener('click', () => {
+            clearInterval(autoSlide);
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+            autoSlide = setInterval(nextSlide, 5000);
+        });
+    } else {
+        console.warn('Botão .banner-prev não encontrado'); // Debug
+    }
+    if (nextButton) {
+        nextButton.addEventListener('click', () => {
+            clearInterval(autoSlide);
+            nextSlide();
+            autoSlide = setInterval(nextSlide, 5000);
+        });
+    } else {
+        console.warn('Botão .banner-next não encontrado'); // Debug
+    }
 }
 
 // Função para fechar o modo foco
 function fecharResenha() {
     document.body.classList.remove('modo-foco');
-    document.getElementById('resenha-detalhe').classList.add('hidden');
-    window.scrollTo({ top: 0, behavior: 'smooth' }); // Garante que volta ao topo ao fechar
+    const resenhaDetalhe = document.getElementById('resenha-detalhe');
+    if (resenhaDetalhe) {
+        resenhaDetalhe.classList.add('hidden');
+    } else {
+        console.warn('Elemento #resenha-detalhe não encontrado'); // Debug
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' }); // Garante que volta ao topo
 }
 
 // Função para exibir resenhas no HTML
 function exibirResenhas(resenhas, categoria = 'todas') {
     const container = document.getElementById('resenhas');
-    if (!container) return;
+    if (!container) {
+        console.warn('Elemento #resenhas não encontrado'); // Debug
+        return;
+    }
 
     container.innerHTML = '';
 
     const filtradas = categoria === 'todas'
         ? resenhas
         : resenhas.filter(r => r.categoria === categoria);
+
+    if (filtradas.length === 0) {
+        console.warn('Nenhuma resenha encontrada para a categoria:', categoria); // Debug
+        container.innerHTML = '<p>Nenhuma resenha disponível.</p>';
+        return;
+    }
 
     filtradas.forEach(item => {
         const section = document.createElement('section');
@@ -91,22 +126,29 @@ function exibirResenhas(resenhas, categoria = 'todas') {
 
         // Clique para abrir resenha em modo foco
         section.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll para o topo
+            window.scrollTo({ top: 0, behavior: 'smooth' });
             document.body.classList.add('modo-foco');
             const detalhe = document.getElementById('conteudo-detalhe');
-            detalhe.innerHTML = `
-                <h2>${item.titulo}</h2>
-                <p><strong>Autor:</strong> ${item.autor}</p>
-                <p>${item.textoCompleto}</p>
-            `;
-            document.getElementById('resenha-detalhe').classList.remove('hidden');
+            if (detalhe) {
+                detalhe.innerHTML = `
+                    <h2>${item.titulo}</h2>
+                    <p><strong>Autor:</strong> ${item.autor}</p>
+                    <p>${item.textoCompleto}</p>
+                `;
+            } else {
+                console.warn('Elemento #conteudo-detalhe não encontrado'); // Debug
+            }
+            const resenhaDetalhe = document.getElementById('resenha-detalhe');
+            if (resenhaDetalhe) {
+                resenhaDetalhe.classList.remove('hidden');
+            }
             history.pushState({ modoFoco: true }, '', '');
         });
 
         // Suporte para teclado
         section.addEventListener('keypress', (e) => {
             if (e.key === 'Enter' || e.key === ' ') {
-                window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll para o topo
+                window.scrollTo({ top: 0, behavior: 'smooth' });
                 section.click();
             }
         });
@@ -135,6 +177,9 @@ async function init() {
 
     // Filtrar por categoria
     const linksMenu = document.querySelectorAll('nav a[data-categoria]');
+    if (linksMenu.length === 0) {
+        console.warn('Nenhum link de menu com data-categoria encontrado'); // Debug
+    }
     linksMenu.forEach(link => {
         link.addEventListener('click', debounce((e) => {
             e.preventDefault();
@@ -144,7 +189,7 @@ async function init() {
             document.body.dataset.categoria = categoriaAtual;
             exibirResenhas(resenhas, categoriaAtual);
             atualizarBanner(categoriaAtual);
-            window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll para o topo ao mudar categoria
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }, 200));
     });
 
@@ -155,11 +200,13 @@ async function init() {
             fecharResenha();
             if (history.state?.modoFoco) history.back();
         }, 200));
+    } else {
+        console.warn('Botão #fechar-resenha não encontrado'); // Debug
     }
 
     // Botão Voltar do navegador
     window.addEventListener('popstate', () => {
-        if (document.body.classList.containsMonkeyType: ('modo-foco')) {
+        if (document.body.classList.contains('modo-foco')) {
             fecharResenha();
         }
     });
