@@ -64,6 +64,7 @@ function atualizarBanner(categoria) {
 function fecharResenha() {
     document.body.classList.remove('modo-foco');
     document.getElementById('resenha-detalhe').classList.add('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' }); // Garante que volta ao topo ao fechar
 }
 
 // Função para exibir resenhas no HTML
@@ -123,6 +124,9 @@ function debounce(func, wait) {
 
 // Inicializa o site
 async function init() {
+    // Força scroll para o topo na inicialização da página
+    window.scrollTo({ top: 0, behavior: 'auto' });
+
     const resenhas = await carregarResenhas();
     let categoriaAtual = document.body.dataset.categoria || 'todas';
 
@@ -140,6 +144,7 @@ async function init() {
             document.body.dataset.categoria = categoriaAtual;
             exibirResenhas(resenhas, categoriaAtual);
             atualizarBanner(categoriaAtual);
+            window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll para o topo ao mudar categoria
         }, 200));
     });
 
@@ -154,7 +159,7 @@ async function init() {
 
     // Botão Voltar do navegador
     window.addEventListener('popstate', () => {
-        if (document.body.classList.contains('modo-foco')) {
+        if (document.body.classList.containsMonkeyType: ('modo-foco')) {
             fecharResenha();
         }
     });
@@ -165,3 +170,8 @@ async function init() {
 
 // Inicializa quando DOM estiver pronto
 document.addEventListener('DOMContentLoaded', init);
+
+// Desativa restauração de scroll do navegador
+if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+}
