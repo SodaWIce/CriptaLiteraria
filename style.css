@@ -22,7 +22,7 @@
 }
 
 body {
-    font-family: 'Inter', sans-serif; /* Fonte padrão para autor, resumo, resenha e footer */
+    font-family: 'Inter', sans-serif; /* Fonte padrão para autor, resumo, resenha, footer e menu */
     background-image: url('gothic-bg.jpg'); /* Substitua por sua imagem gótica */
     background-size: cover;
     background-position: center;
@@ -69,20 +69,20 @@ header .logo:hover {
 nav ul {
     display: flex;
     justify-content: center;
-    gap: 2rem; /* Aumentado para evitar sobreposição */
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    padding: 0.8rem 0;
-    -webkit-overflow-scrolling: touch;
+    gap: 1rem; /* Reduzido para ajustar ao espaço */
+    flex-wrap: wrap; /* Permite quebra de linha */
+    padding: 0.8rem 0.5rem; /* Padding ajustado para evitar corte */
+    max-width: 100%; /* Garante que não ultrapasse a tela */
+    box-sizing: border-box;
 }
 
 nav a {
     color: var(--text-color);
     text-decoration: none;
-    font-family: 'Cinzel', serif; /* Mantido para o menu */
+    font-family: 'Inter', sans-serif; /* Fonte limpa e moderna */
     font-size: 1.1rem;
     font-weight: 500;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 0.8rem;
     min-width: max-content; /* Evita truncamento de "Autores Nacionais" */
     transition: var(--transition);
     will-change: transform, color;
@@ -96,8 +96,8 @@ nav a:hover, nav a.ativo {
 
 /* Banner Carrossel */
 .banner-carousel {
-    width: 100%; /* Full-width, igual ao header */
-    margin: 0; /* Sem margens para cobrir toda a largura */
+    width: 100%;
+    margin: 0;
     position: relative;
     overflow: hidden;
     background: var(--section-bg);
@@ -111,7 +111,7 @@ nav a:hover, nav a.ativo {
 
 .banner-slide {
     display: none;
-    padding: 2.5rem 2rem; /* Ajustado para espaçamento interno */
+    padding: 2.5rem 2rem;
     text-align: center;
     transition: opacity 0.5s ease;
 }
@@ -123,8 +123,8 @@ nav a:hover, nav a.ativo {
 
 .banner-image {
     max-width: 100%;
-    width: 100%; /* Garante que a imagem ocupe toda a largura */
-    height: 300px; /* Aumentado para maior impacto visual */
+    width: 100%;
+    height: 300px;
     object-fit: cover;
     margin-bottom: 1.2rem;
     border-bottom: 2px solid var(--primary-color);
@@ -138,9 +138,10 @@ nav a:hover, nav a.ativo {
 }
 
 .banner-text {
+    font-family: 'Inter', sans-serif;
     font-size: 1.2rem;
     color: var(--text-color);
-    max-width: 900px; /* Limita texto para legibilidade */
+    max-width: 900px;
     margin: 0 auto;
 }
 
@@ -152,24 +153,24 @@ nav a:hover, nav a.ativo {
     display: flex;
     justify-content: space-between;
     transform: translateY(-50%);
-    padding: 0 10px; /* Botões mais próximos das bordas */
+    padding: 0 10px;
 }
 
 .banner-prev, .banner-next {
-    background: rgba(74, 14, 14, 0.5); /* Semi-transparente para discrição */
+    background: rgba(74, 14, 14, 0.5);
     color: var(--text-color);
     border: none;
-    padding: 0.4rem 0.8rem; /* Menor tamanho */
+    padding: 0.4rem 0.8rem;
     cursor: pointer;
-    font-size: 1rem; /* Menor fonte */
-    opacity: 0.7; /* Mais discreto */
+    font-size: 1rem;
+    opacity: 0.7;
     transition: var(--transition);
 }
 
 .banner-prev:hover, .banner-next:hover {
     background: var(--primary-color);
-    opacity: 1; /* Mais visível no hover */
-    transform: scale(1.05); /* Escala reduzida para discrição */
+    opacity: 1;
+    transform: scale(1.05);
 }
 
 /* Modo Foco */
@@ -199,7 +200,7 @@ body.modo-foco #resenhas {
     color: var(--text-color);
     border: none;
     padding: 0.8rem 1.6rem;
-    font-family: 'Inter', sans-serif; /* Fonte moderna para botão */
+    font-family: 'Inter', sans-serif;
     font-size: 1.1rem;
     margin-bottom: 1.5rem;
     cursor: pointer;
@@ -225,7 +226,7 @@ body.modo-foco #resenhas {
 }
 
 #conteudo-detalhe p {
-    font-family: 'Inter', sans-serif; /* Fonte moderna para texto da resenha */
+    font-family: 'Inter', sans-serif;
     font-size: 1.1rem;
     line-height: 1.8;
     text-align: left;
@@ -233,7 +234,7 @@ body.modo-foco #resenhas {
 
 /* Resenhas */
 main {
-    max-width: 1200px; /* Mantido para resenhas, centralizado */
+    max-width: 1200px;
     margin: 2.5rem auto;
     padding: 0 1rem;
 }
@@ -263,7 +264,7 @@ main {
 }
 
 .resenha p {
-    font-family: 'Inter', sans-serif; /* Fonte moderna para autor e resumo */
+    font-family: 'Inter', sans-serif;
     font-size: 1rem;
     line-height: 1.7;
     color: var(--text-color);
@@ -275,11 +276,11 @@ footer {
     color: var(--text-secondary);
     text-align: center;
     padding: 2rem;
-    font-family: 'Inter', sans-serif; /* Fonte moderna para footer */
+    font-family: 'Inter', sans-serif;
     font-size: 0.9rem;
     margin-top: 2.5rem;
     box-shadow: var(--shadow);
-    width: 100%; /* Garante que o rodapé seja full-width */
+    width: 100%;
 }
 
 /* Responsividade */
@@ -293,14 +294,14 @@ footer {
     }
 
     nav ul {
-        gap: 1.2rem;
-        padding: 0.6rem;
-        justify-content: flex-start;
+        gap: 0.8rem;
+        padding: 0.6rem 0.8rem;
+        justify-content: center; /* Centraliza em telas menores */
     }
 
     nav a {
-        font-size: 1rem;
-        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+        padding: 0.4rem 0.6rem;
     }
 
     .banner-slide {
@@ -308,7 +309,7 @@ footer {
     }
 
     .banner-image {
-        height: 220px; /* Ajustado para mobile */
+        height: 220px;
     }
 
     .banner-title {
@@ -362,12 +363,13 @@ footer {
     }
 
     nav ul {
-        gap: 0.8rem;
+        gap: 0.5rem; /* Menor gap para mobile */
+        padding: 0.5rem 0.5rem;
     }
 
     nav a {
-        font-size: 0.9rem;
-        padding: 0.3rem 0.6rem;
+        font-size: 0.85rem;
+        padding: 0.3rem 0.5rem;
     }
 
     .banner-slide {
