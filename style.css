@@ -477,12 +477,12 @@ footer {
 
     nav ul {
         gap: 0.5rem;
-        padding: 0.3rem 0.5rem;
+        padding: 0.4rem 0.5rem;
         flex-wrap: wrap;
     }
 
     nav a {
-        font-size: 0.7rem;
+        font-size: 0.8rem;
         padding: 0.3rem 0.6rem;
     }
 
