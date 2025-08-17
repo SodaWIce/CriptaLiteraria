@@ -42,8 +42,8 @@ function atualizarBanner(categoria) {
         showSlide(currentSlide);
     }
 
-    // Auto-rotaciona a cada 5 segundos
-    let autoSlide = setInterval(nextSlide, 5000);
+    // Auto-rotaciona a cada 8 segundos
+    let autoSlide = setInterval(nextSlide, 8000);
 
     // Controles manuais
     document.querySelector('.banner-prev').addEventListener('click', () => {
