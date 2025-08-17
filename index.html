@@ -10,9 +10,8 @@
 </head>
 <body data-categoria="todas">
     <header>
-        <h1>
-            <img src="cripta.png" alt="Cripta Logo" class="logo">
-        </h1>
+        <h1 class="visually-hidden">Cripta</h1>
+        <img src="cripta.png" alt="Cripta Logo" class="logo" width="200" height="60" loading="lazy">
         <nav aria-label="Navegação principal">
             <ul>
                 <li><a href="#" data-categoria="todas" class="ativo" aria-label="Página inicial">Início</a></li>
@@ -24,29 +23,33 @@
     </header>
 
     <div id="banner-destaques" class="banner-carousel" aria-label="Destaques de livros">
-    <div class="banner-slide active">
-        <div class="banner-image-wrapper">
-            <img src="destaque1.png" alt="Destaque 1" class="banner-image">
+        <div class="banner-slide active">
+            <div class="banner-image-wrapper">
+                <img src="destaque1.png" alt="Destaque 1" class="banner-image" width="1200" height="300" loading="lazy">
+            </div>
+            <h2 class="banner-title">Destaque 1</h2>
+            <p class="banner-text">Descrição do destaque 1.</p>
         </div>
-        <h2 class="banner-title"></h2>
-        <p class="banner-text"></p>
-    </div>
-    <div class="banner-slide">
-        <div class="banner-image-wrapper">
-            <img src="placeholder2.jpg" alt="Destaque 2" class="banner-image">
+        <div class="banner-slide">
+            <div class="banner-image-wrapper">
+                <img src="placeholder2.jpg" alt="Destaque 2" class="banner-image" width="1200" height="300" loading="lazy">
+            </div>
+            <h2 class="banner-title">Destaque 2</h2>
+            <p class="banner-text">Um lançamento arrepiante de 2025.</p>
         </div>
-        <h2 class="banner-title">Destaque 2</h2>
-        <p class="banner-text">Um lançamento arrepiante de 2025.</p>
-    </div>
-    <div class="banner-slide">
-        <div class="banner-image-wrapper">
-            <img src="placeholder3.jpg" alt="Destaque 3" class="banner-image">
+        <div class="banner-slide">
+            <div class="banner-image-wrapper">
+                <img src="placeholder3.jpg" alt="Destaque 3" class="banner-image" width="1200" height="300" loading="lazy">
+            </div>
+            <h2 class="banner-title">Destaque 3</h2>
+            <p class="banner-text">Obra-prima de um autor nacional.</p>
         </div>
-        <h2 class="banner-title">Destaque 3</h2>
-        <p class="banner-text">Obra-prima de um autor nacional.</p>
+        <div class="banner-indicators" aria-label="Indicadores de slides">
+            <span class="banner-indicator active" aria-label="Slide 1"></span>
+            <span class="banner-indicator" aria-label="Slide 2"></span>
+            <span class="banner-indicator" aria-label="Slide 3"></span>
+        </div>
     </div>
-    <div class="banner-indicators" aria-label="Indicadores de slides"></div>
-</div>
 
     <div id="resenha-detalhe" class="hidden" aria-live="polite">
         <button id="fechar-resenha" aria-label="Voltar para lista de resenhas">Voltar</button>
@@ -54,7 +57,10 @@
     </div>
 
     <main id="resenhas" aria-label="Lista de resenhas">
-        <!-- Conteúdo das resenhas -->
+        <div class="resenha">
+            <h2>Teste de Resenha</h2>
+            <p>Esta é uma resenha de teste para verificar o espaçamento.</p>
+        </div>
     </main>
 
     <footer>
