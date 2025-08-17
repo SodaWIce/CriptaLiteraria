@@ -90,6 +90,7 @@ function exibirResenhas(resenhas, categoria = 'todas') {
 
         // Clique para abrir resenha em modo foco
         section.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll para o topo
             document.body.classList.add('modo-foco');
             const detalhe = document.getElementById('conteudo-detalhe');
             detalhe.innerHTML = `
@@ -104,6 +105,7 @@ function exibirResenhas(resenhas, categoria = 'todas') {
         // Suporte para teclado
         section.addEventListener('keypress', (e) => {
             if (e.key === 'Enter' || e.key === ' ') {
+                window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll para o topo
                 section.click();
             }
         });

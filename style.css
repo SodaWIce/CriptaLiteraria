@@ -22,7 +22,7 @@
 }
 
 body {
-    font-family: 'Lora', serif;
+    font-family: 'Inter', sans-serif; /* Fonte padrão para autor, resumo, resenha e footer */
     background-image: url('gothic-bg.jpg'); /* Substitua por sua imagem gótica */
     background-size: cover;
     background-position: center;
@@ -49,9 +49,10 @@ body {
 /* Cabeçalho */
 header {
     background: var(--header-bg);
-    padding: 1.2rem 1rem;
+    padding: 1.5rem 1rem;
     text-align: center;
     box-shadow: var(--shadow);
+    width: 100%;
     animation: fadeIn 0.8s ease;
 }
 
@@ -68,20 +69,21 @@ header .logo:hover {
 nav ul {
     display: flex;
     justify-content: center;
-    gap: 1.5rem;
+    gap: 2rem; /* Aumentado para evitar sobreposição */
     flex-wrap: nowrap;
     overflow-x: auto;
-    padding: 0.5rem 0;
+    padding: 0.8rem 0;
     -webkit-overflow-scrolling: touch;
 }
 
 nav a {
     color: var(--text-color);
     text-decoration: none;
-    font-family: 'Cinzel', serif;
+    font-family: 'Cinzel', serif; /* Mantido para o menu */
     font-size: 1.1rem;
     font-weight: 500;
     padding: 0.5rem 1rem;
+    min-width: max-content; /* Evita truncamento de "Autores Nacionais" */
     transition: var(--transition);
     will-change: transform, color;
 }
@@ -94,8 +96,8 @@ nav a:hover, nav a.ativo {
 
 /* Banner Carrossel */
 .banner-carousel {
-    max-width: 1200px;
-    margin: 1rem auto;
+    width: 100%; /* Full-width, igual ao header */
+    margin: 0; /* Sem margens para cobrir toda a largura */
     position: relative;
     overflow: hidden;
     background: var(--section-bg);
@@ -109,7 +111,7 @@ nav a:hover, nav a.ativo {
 
 .banner-slide {
     display: none;
-    padding: 2rem;
+    padding: 2.5rem 2rem; /* Ajustado para espaçamento interno */
     text-align: center;
     transition: opacity 0.5s ease;
 }
@@ -121,26 +123,28 @@ nav a:hover, nav a.ativo {
 
 .banner-image {
     max-width: 100%;
-    height: 250px;
+    width: 100%; /* Garante que a imagem ocupe toda a largura */
+    height: 300px; /* Aumentado para maior impacto visual */
     object-fit: cover;
-    margin-bottom: 1rem;
+    margin-bottom: 1.2rem;
     border-bottom: 2px solid var(--primary-color);
 }
 
 .banner-title {
-    font-family: 'Cinzel', serif;
-    font-size: 2rem;
+    font-family: 'Cinzel', serif; /* Mantido para títulos */
+    font-size: 2.2rem;
     color: var(--primary-color);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.6rem;
 }
 
 .banner-text {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     color: var(--text-color);
-    max-width: 800px;
+    max-width: 900px; /* Limita texto para legibilidade */
     margin: 0 auto;
 }
 
+/* Controles do carrossel */
 .banner-controls {
     position: absolute;
     top: 50%;
@@ -148,21 +152,24 @@ nav a:hover, nav a.ativo {
     display: flex;
     justify-content: space-between;
     transform: translateY(-50%);
+    padding: 0 10px; /* Botões mais próximos das bordas */
 }
 
 .banner-prev, .banner-next {
-    background: var(--secondary-color);
+    background: rgba(74, 14, 14, 0.5); /* Semi-transparente para discrição */
     color: var(--text-color);
     border: none;
-    padding: 0.6rem 1.2rem;
+    padding: 0.4rem 0.8rem; /* Menor tamanho */
     cursor: pointer;
-    font-size: 1.3rem;
+    font-size: 1rem; /* Menor fonte */
+    opacity: 0.7; /* Mais discreto */
     transition: var(--transition);
 }
 
 .banner-prev:hover, .banner-next:hover {
     background: var(--primary-color);
-    transform: scale(1.1);
+    opacity: 1; /* Mais visível no hover */
+    transform: scale(1.05); /* Escala reduzida para discrição */
 }
 
 /* Modo Foco */
@@ -173,7 +180,7 @@ body.modo-foco #resenhas {
 }
 
 #resenha-detalhe {
-    padding: 2rem 1rem;
+    padding: 2.5rem 1rem;
     background: var(--section-bg);
     color: var(--text-color);
     min-height: 100vh;
@@ -192,7 +199,7 @@ body.modo-foco #resenhas {
     color: var(--text-color);
     border: none;
     padding: 0.8rem 1.6rem;
-    font-family: 'Cinzel', serif;
+    font-family: 'Inter', sans-serif; /* Fonte moderna para botão */
     font-size: 1.1rem;
     margin-bottom: 1.5rem;
     cursor: pointer;
@@ -210,7 +217,7 @@ body.modo-foco #resenhas {
 }
 
 #conteudo-detalhe h2 {
-    font-family: 'Cinzel', serif;
+    font-family: 'Cinzel', serif; /* Mantido para título do livro */
     color: var(--primary-color);
     font-size: 2.2rem;
     margin-bottom: 1rem;
@@ -218,6 +225,7 @@ body.modo-foco #resenhas {
 }
 
 #conteudo-detalhe p {
+    font-family: 'Inter', sans-serif; /* Fonte moderna para texto da resenha */
     font-size: 1.1rem;
     line-height: 1.8;
     text-align: left;
@@ -225,15 +233,15 @@ body.modo-foco #resenhas {
 
 /* Resenhas */
 main {
-    max-width: 1200px;
-    margin: 2rem auto;
+    max-width: 1200px; /* Mantido para resenhas, centralizado */
+    margin: 2.5rem auto;
     padding: 0 1rem;
 }
 
 .resenha {
     background: var(--section-bg);
-    padding: 1.5rem;
-    margin-bottom: 1rem;
+    padding: 2rem;
+    margin-bottom: 1.2rem;
     border-bottom: 1px solid var(--primary-color);
     transition: var(--transition);
     cursor: pointer;
@@ -248,13 +256,14 @@ main {
 }
 
 .resenha h2 {
-    font-family: 'Cinzel', serif;
+    font-family: 'Cinzel', serif; /* Mantido para título do livro */
     color: var(--primary-color);
     font-size: 1.8rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.6rem;
 }
 
 .resenha p {
+    font-family: 'Inter', sans-serif; /* Fonte moderna para autor e resumo */
     font-size: 1rem;
     line-height: 1.7;
     color: var(--text-color);
@@ -265,16 +274,18 @@ footer {
     background: var(--header-bg);
     color: var(--text-secondary);
     text-align: center;
-    padding: 1.5rem;
+    padding: 2rem;
+    font-family: 'Inter', sans-serif; /* Fonte moderna para footer */
     font-size: 0.9rem;
-    margin-top: 2rem;
+    margin-top: 2.5rem;
     box-shadow: var(--shadow);
+    width: 100%; /* Garante que o rodapé seja full-width */
 }
 
 /* Responsividade */
 @media (max-width: 768px) {
     header {
-        padding: 1rem 0.8rem;
+        padding: 1.2rem 0.8rem;
     }
 
     header .logo {
@@ -282,34 +293,41 @@ footer {
     }
 
     nav ul {
-        gap: 1rem;
-        padding: 0.5rem;
+        gap: 1.2rem;
+        padding: 0.6rem;
         justify-content: flex-start;
     }
 
     nav a {
-        font-size: 0.95rem;
+        font-size: 1rem;
         padding: 0.4rem 0.8rem;
     }
 
     .banner-slide {
-        padding: 1.5rem;
+        padding: 2rem 1.5rem;
     }
 
     .banner-image {
-        height: 180px;
+        height: 220px; /* Ajustado para mobile */
     }
 
     .banner-title {
-        font-size: 1.6rem;
+        font-size: 1.8rem;
     }
 
     .banner-text {
         font-size: 1rem;
+        max-width: 90%;
+    }
+
+    .banner-prev, .banner-next {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.9rem;
     }
 
     .resenha {
-        padding: 1.2rem;
+        padding: 1.5rem;
+        margin-bottom: 1rem;
     }
 
     .resenha h2 {
@@ -327,11 +345,16 @@ footer {
     #conteudo-detalhe p {
         font-size: 1rem;
     }
+
+    #fechar-resenha {
+        padding: 0.7rem 1.4rem;
+        font-size: 1rem;
+    }
 }
 
 @media (max-width: 480px) {
     header {
-        padding: 0.8rem 0.5rem;
+        padding: 1rem 0.5rem;
     }
 
     header .logo {
@@ -343,12 +366,16 @@ footer {
     }
 
     nav a {
-        font-size: 0.85rem;
+        font-size: 0.9rem;
         padding: 0.3rem 0.6rem;
     }
 
+    .banner-slide {
+        padding: 1.5rem 1rem;
+    }
+
     .banner-image {
-        height: 140px;
+        height: 160px;
     }
 
     .banner-title {
@@ -359,8 +386,13 @@ footer {
         font-size: 0.9rem;
     }
 
+    .banner-prev, .banner-next {
+        padding: 0.2rem 0.5rem;
+        font-size: 0.8rem;
+    }
+
     .resenha {
-        padding: 1rem;
+        padding: 1.2rem;
     }
 
     .resenha h2 {
@@ -371,16 +403,21 @@ footer {
         font-size: 0.9rem;
     }
 
-    #fechar-resenha {
-        padding: 0.6rem 1.2rem;
-        font-size: 1rem;
-    }
-
     #conteudo-detalhe h2 {
         font-size: 1.6rem;
     }
 
     #conteudo-detalhe p {
         font-size: 0.95rem;
+    }
+
+    #fechar-resenha {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.95rem;
+    }
+
+    footer {
+        padding: 1.5rem;
+        font-size: 0.85rem;
     }
 }
