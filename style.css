@@ -65,15 +65,11 @@ header {
 }
 
 header .logo {
-    max-height: 60px;
+    max-height: 80px;
     width: auto;
     transition: var(--transition);
     border: 2px solid var(--primary-color); /* Keep cartoonish border for logo */
     border-radius: 10px;
-}
-
-header .logo:hover {
-    transform: scale(1.2); /* Exaggerated hover effect */
 }
 
 nav ul {
