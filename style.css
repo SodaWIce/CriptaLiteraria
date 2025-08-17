@@ -104,6 +104,7 @@ nav a {
 nav a:hover, nav a.ativo {
     color: var(--secondary-color);
     background: var(--primary-color);
+    border: 2px solid var(--secondary-color);
     transform: scale(1.1); /* Bouncy hover */
 }
 
