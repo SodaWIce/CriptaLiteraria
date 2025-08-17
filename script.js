@@ -1,6 +1,6 @@
 // Dados do banner (personalizáveis)
 const bannerData = [
-    { image: 'placeholder1.jpg', title: 'Destaque 1', text: 'Explore um clássico do terror gótico.' },
+    { image: 'destaque1.jpg', title: '', text: '' },
     { image: 'placeholder2.jpg', title: 'Destaque 2', text: 'Um lançamento arrepiante de 2025.' },
     { image: 'placeholder3.jpg', title: 'Destaque 3', text: 'Obra-prima de um autor nacional.' }
 ];
