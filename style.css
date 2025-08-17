@@ -75,6 +75,7 @@ nav ul {
     max-width: 100%;
     box-sizing: border-box;
     align-items: center;
+    list-style: none; /* Remove qualquer bullet padrão do navegador */
 }
 
 nav a {
@@ -87,19 +88,7 @@ nav a {
     min-width: max-content;
     transition: var(--transition);
     will-change: transform, color;
-    display: inline-block; /* Garante alinhamento com bolinhas */
     line-height: 1.5;
-}
-
-/* Bolinhas como separadores */
-nav a:not(:last-child)::after {
-    content: '•';
-    color: var(--text-color); /* Branco, combinando com o texto */
-    margin-left: 0.5rem; /* Espaço após o texto */
-    font-size: 0.8rem;
-    opacity: 0.7;
-    display: inline-block;
-    vertical-align: middle; /* Alinha com o texto */
 }
 
 nav a:hover, nav a.ativo {
@@ -319,11 +308,6 @@ footer {
         padding: 0.4rem 0.6rem;
     }
 
-    nav a:not(:last-child)::after {
-        margin-left: 0.4rem;
-        font-size: 0.7rem;
-    }
-
     .banner-slide {
         padding: 2rem 1.5rem;
     }
@@ -392,11 +376,6 @@ footer {
     nav a {
         font-size: 0.85rem;
         padding: 0.3rem 0.5rem;
-    }
-
-    nav a:not(:last-child)::after {
-        margin-left: 0.3rem;
-        font-size: 0.6rem;
     }
 
     .banner-slide {
