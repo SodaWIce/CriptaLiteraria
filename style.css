@@ -1,143 +1,349 @@
-/* Geral */
-body {
-    font-family: 'Roboto', sans-serif;
+/* Variáveis globais para o tema gótico */
+:root {
+    --primary-color: #DC143C; /* Vermelho carmesim */
+    --primary-hover: #B31232; /* Vermelho mais escuro para hover */
+    --secondary-color: #4A0E0E; /* Muted crimson para detalhes */
+    --bg-color: #1C2526; /* Charcoal escuro para fundo */
+    --card-bg: rgba(44, 51, 51, 0.9); /* Fundo das resenhas com transparência */
+    --card-hover-bg: rgba(44, 51, 51, 1);
+    --text-color: #F4EDE4; /* Marfim suave para texto */
+    --text-dark: #2C3333; /* Charcoal escuro para contraste */
+    --shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    --border-radius: 12px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Reset básico */
+* {
     margin: 0;
-    /* Definindo a imagem de fundo */
-    background-image: url('fundo.jpg');
+    padding: 0;
+    box-sizing: border-box;
+}
 
-    /* Faz a imagem cobrir toda a tela */
+body {
+    font-family: 'Lora', serif;
+    background-image: url('gothic-bg.jpg'); /* Substitua por sua imagem */
     background-size: cover;
-
-    /* Mantém a imagem centralizada */
     background-position: center;
+    background-attachment: fixed;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    animation: fadeIn 1s ease;
+}
 
-    /* Impede que a imagem se repita */
-    background-repeat: no-repeat;
+/* Animações */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 
-    color: #f2f2f2; /* texto claro */
+@keyframes slideFade {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
 }
 
 /* Cabeçalho */
 header {
-    background-color: #1A1A1A; /* tom mais quente que o footer */
-    padding: 1em;
+    background: var(--card-bg);
+    padding: 1rem;
     text-align: center;
+    box-shadow: var(--shadow);
+    animation: fadeIn 0.8s ease;
 }
 
-header h1 {
-    margin: 0; /* remove espaçamento extra */
-}
-
-header h1 img {
-    max-height: 60px; /* ajuste a altura para caber no padding atual */
-    height: auto;
+header .logo {
+    max-height: 70px;
     width: auto;
+    transition: var(--transition);
 }
 
-/* Menu */
-nav {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1em;
-    margin-top: 0.5em;
-}
-
-nav a {
-    color: #f2f2f2;
-    text-decoration: none; /* remove sublinhado padrão */
-    margin: 0.5em 0;
-    transition: color 0.2s, transform 0.2s;
-}
-
-nav a:hover {
-    color: #dc143c; /* vermelho substituído */
+header .logo:hover {
     transform: scale(1.05);
 }
 
-/* Banner de destaques */
-#banner-destaques {
-    background-color: #1A1A1A; /* combinando com header */
-    color: #f2f2f2;
-    padding: 1em;
-    text-align: center;
-    font-size: 1.1em;
-    transition: opacity 0.3s ease;
+nav ul {
+    display: flex;
+    justify-content: center;
+    gap: 1.2rem;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 0.5rem 0;
+    -webkit-overflow-scrolling: touch;
 }
 
+nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: var(--transition);
+    will-change: transform, background;
+}
+
+nav a:hover, nav a.ativo {
+    background: var(--secondary-color);
+    color: var(--primary-color);
+    transform: scale(1.05);
+}
+
+/* Banner Carrossel */
+.banner-carousel {
+    position: relative;
+    max-width: 900px;
+    margin: 1rem auto;
+    overflow: hidden;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    display: none;
+    animation: fadeIn 0.8s ease;
+}
+
+.banner-carousel:not(.hidden) {
+    display: block;
+}
+
+.banner-slide {
+    display: none;
+    text-align: center;
+    padding: 2rem;
+    background: var(--card-bg);
+    transition: opacity 0.5s ease;
+}
+
+.banner-slide.active {
+    display: block;
+    animation: slideFade 0.5s ease;
+}
+
+.banner-image {
+    max-width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.banner-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.banner-text {
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+.banner-controls {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+}
+
+.banner-prev, .banner-next {
+    background: var(--secondary-color);
+    color: var(--text-color);
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 1.2rem;
+}
+
+.banner-prev:hover, .banner-next:hover {
+    background: var(--primary-color);
+    transform: scale(1.1);
+}
+
+/* Modo Foco */
 body.modo-foco header,
-body.modo-foco #banner-destaques,
+body.modo-foco .banner-carousel,
 body.modo-foco #resenhas {
-    display: none !important; /* Esconde cabeçalho, banner e lista de resenhas */
+    display: none !important;
 }
 
 #resenha-detalhe {
-    padding: 2em;
-    background-color: #111111;
-    color: #f2f2f2;
-    text-align: center;
+    padding: 2rem;
+    background: var(--card-bg);
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: fadeIn 0.5s ease;
 }
 
-#resenha-detalhe button {
-    margin-bottom: 1em;
+#resenha-detalhe.hidden {
+    display: none;
 }
 
-/* Conteúdo principal */
+#fechar-resenha {
+    background: var(--secondary-color);
+    color: var(--text-color);
+    border: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    transition: var(--transition);
+}
+
+#fechar-resenha:hover {
+    background: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+#conteudo-detalhe h2 {
+    font-family: 'Cinzel', serif;
+    color: var(--primary-color);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+#conteudo-detalhe p {
+    max-width: 700px;
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+/* Resenhas */
 main {
-    padding: 1em;
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 1rem;
 }
 
-/* Cartões de resenha */
 .resenha {
-    background-color: #1A1A1A; /* fundo escuro leve */
-    border-radius: 10px;
-    padding: 1.5em;
-    margin-bottom: 1.5em;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    cursor: pointer;
+    animation: fadeIn 0.6s ease;
 }
 
-.resenha:hover {
+.resenha:hover, .resenha:focus {
     transform: translateY(-5px);
-    box-shadow: 0 0 20px rgba(220, 20, 60, 0.5); /* sombra vermelho substituído */
+    box-shadow: 0 12px 32px rgba(220, 20, 60, 0.3);
+    background: var(--card-hover-bg);
 }
 
 .resenha h2 {
-    margin: 0.2em 0;
-    color: #dc143c; /* vermelho substituído */
+    font-family: 'Cinzel', serif;
+    color: var(--primary-color);
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
 }
 
 .resenha p {
-    line-height: 1.6;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-color);
 }
 
-/* Footer */
+/* Rodapé */
 footer {
-    background-color: #1A1A1A; /* mesmo tom do header */
-    color: #bbb; /* tom mais claro, menos frio */
+    background: var(--card-bg);
+    color: var(--text-color);
     text-align: center;
-    padding: 1em;
-    margin-top: 2em;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    font-size: 0.9rem;
+    margin-top: 2rem;
 }
 
-/* Responsividade para telas pequenas */
-@media (max-width: 600px) {
-    main {
-        padding: 1em;
+footer p {
+    opacity: 0.9;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    header {
+        padding: 0.8rem;
     }
+
+    header .logo {
+        max-height: 50px;
+    }
+
+    nav ul {
+        gap: 0.8rem;
+        padding: 0.4rem 0;
+    }
+
+    nav a {
+        font-size: 0.95rem;
+        padding: 0.4rem 0.8rem;
+    }
+
+    .banner-slide {
+        padding: 1.5rem;
+    }
+
+    .banner-image {
+        height: 150px;
+    }
+
+    .banner-title {
+        font-size: 1.5rem;
+    }
+
     .resenha {
-        padding: 1em;
-        margin-bottom: 1em;
+        padding: 1rem;
+        margin-bottom: 1rem;
     }
+
     .resenha h2 {
-        font-size: 1.2em;
+        font-size: 1.4rem;
     }
+
     .resenha p {
-        font-size: 0.95em;
+        font-size: 0.95rem;
+    }
+
+    #conteudo-detalhe h2 {
+        font-size: 1.8rem;
+    }
+
+    #conteudo-detalhe p {
+        font-size: 1rem;
     }
 }
 
-/* Transições gerais para hover/focus em botões e links */
-a, button {
-    transition: transform 0.2s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+@media (max-width: 480px) {
+    nav ul {
+        justify-content: flex-start;
+    }
+
+    nav a {
+        font-size: 0.85rem;
+        padding: 0.3rem 0.6rem;
+    }
+
+    .banner-image {
+        height: 120px;
+    }
+
+    .banner-title {
+        font-size: 1.3rem;
+    }
+
+    .banner-text {
+        font-size: 0.9rem;
+    }
 }

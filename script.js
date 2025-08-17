@@ -1,3 +1,10 @@
+// Dados do banner (personalizáveis)
+const bannerData = [
+    { image: 'placeholder1.jpg', title: 'Destaque 1', text: 'Explore um clássico do terror gótico.' },
+    { image: 'placeholder2.jpg', title: 'Destaque 2', text: 'Um lançamento arrepiante de 2025.' },
+    { image: 'placeholder3.jpg', title: 'Destaque 3', text: 'Obra-prima de um autor nacional.' }
+];
+
 // Função para carregar as resenhas do JSON
 async function carregarResenhas() {
     try {
@@ -10,24 +17,53 @@ async function carregarResenhas() {
     }
 }
 
-// Atualiza o banner de acordo com a categoria
+// Função para atualizar o carrossel de banner
 function atualizarBanner(categoria) {
-    const banner = document.getElementById("banner-destaques");
+    const banner = document.getElementById('banner-destaques');
     if (!banner) return;
-    
-    // Se estiver em modo foco, mantém escondido
-    if (document.body.classList.contains('modo-foco')) {
-        banner.style.display = 'none';
+
+    if (document.body.classList.contains('modo-foco') || categoria !== 'todas') {
+        banner.classList.add('hidden');
         return;
     }
 
-    banner.style.display = categoria === "todas" ? "block" : "none";
+    banner.classList.remove('hidden');
+    const slides = document.querySelectorAll('.banner-slide');
+    let currentSlide = 0;
+
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.classList.toggle('active', i === index);
+        });
+    }
+
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+    }
+
+    // Auto-rotaciona a cada 5 segundos
+    let autoSlide = setInterval(nextSlide, 5000);
+
+    // Controles manuais
+    document.querySelector('.banner-prev').addEventListener('click', () => {
+        clearInterval(autoSlide);
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(currentSlide);
+        autoSlide = setInterval(nextSlide, 5000);
+    });
+
+    document.querySelector('.banner-next').addEventListener('click', () => {
+        clearInterval(autoSlide);
+        nextSlide();
+        autoSlide = setInterval(nextSlide, 5000);
+    });
 }
 
 // Função para fechar o modo foco
 function fecharResenha() {
     document.body.classList.remove('modo-foco');
-    document.getElementById('resenha-detalhe').style.display = 'none';
+    document.getElementById('resenha-detalhe').classList.add('hidden');
 }
 
 // Função para exibir resenhas no HTML
@@ -44,6 +80,7 @@ function exibirResenhas(resenhas, categoria = 'todas') {
     filtradas.forEach(item => {
         const section = document.createElement('section');
         section.className = 'resenha';
+        section.setAttribute('tabindex', '0');
         section.innerHTML = `
             <h2>${item.titulo}</h2>
             <p><strong>Autor:</strong> ${item.autor}</p>
@@ -60,47 +97,57 @@ function exibirResenhas(resenhas, categoria = 'todas') {
                 <p><strong>Autor:</strong> ${item.autor}</p>
                 <p>${item.textoCompleto}</p>
             `;
-            document.getElementById('resenha-detalhe').style.display = 'block';
+            document.getElementById('resenha-detalhe').classList.remove('hidden');
+            history.pushState({ modoFoco: true }, '', '');
+        });
 
-            // Adiciona histórico para botão Voltar do navegador
-            history.pushState({modoFoco: true}, '', '');
+        // Suporte para teclado
+        section.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                section.click();
+            }
         });
     });
+}
+
+// Função debounce para otimizar eventos
+function debounce(func, wait) {
+    let timeout;
+    return function (...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, args), wait);
+    };
 }
 
 // Inicializa o site
 async function init() {
     const resenhas = await carregarResenhas();
-
-    let categoriaAtual = document.body?.dataset?.categoria || 'todas';
+    let categoriaAtual = document.body.dataset.categoria || 'todas';
 
     // Exibe resenhas iniciais
     exibirResenhas(resenhas, categoriaAtual);
 
-    // Filtrar por categoria ao clicar no menu
+    // Filtrar por categoria
     const linksMenu = document.querySelectorAll('nav a[data-categoria]');
     linksMenu.forEach(link => {
-        link.addEventListener('click', (e) => {
+        link.addEventListener('click', debounce((e) => {
             e.preventDefault();
-
-            // Atualiza link ativo visualmente
             linksMenu.forEach(l => l.classList.remove('ativo'));
             link.classList.add('ativo');
-
-            // Atualiza categoria e exibe resenhas
             categoriaAtual = link.dataset.categoria || 'todas';
+            document.body.dataset.categoria = categoriaAtual;
             exibirResenhas(resenhas, categoriaAtual);
             atualizarBanner(categoriaAtual);
-        });
+        }, 200));
     });
 
     // Botão “Voltar” interno
     const btnFechar = document.getElementById('fechar-resenha');
     if (btnFechar) {
-        btnFechar.addEventListener('click', () => {
+        btnFechar.addEventListener('click', debounce(() => {
             fecharResenha();
             if (history.state?.modoFoco) history.back();
-        });
+        }, 200));
     }
 
     // Botão Voltar do navegador
@@ -115,4 +162,4 @@ async function init() {
 }
 
 // Inicializa quando DOM estiver pronto
-document.addEventListener("DOMContentLoaded", init);
+document.addEventListener('DOMContentLoaded', init);
