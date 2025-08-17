@@ -1,15 +1,16 @@
 /* Variáveis globais para o tema gótico */
 :root {
     --primary-color: #DC143C; /* Vermelho carmesim */
-    --primary-hover: #B31232; /* Vermelho mais escuro para hover */
+    --primary-hover: #B31232; /* Vermelho escuro para hover */
     --secondary-color: #4A0E0E; /* Muted crimson para detalhes */
-    --bg-color: #1C2526; /* Charcoal escuro para fundo */
-    --card-bg: rgba(44, 51, 51, 0.9); /* Fundo das resenhas com transparência */
-    --card-hover-bg: rgba(44, 51, 51, 1);
-    --text-color: #F4EDE4; /* Marfim suave para texto */
-    --text-dark: #2C3333; /* Charcoal escuro para contraste */
-    --shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-    --border-radius: 12px;
+    --bg-color: #1A1A1A; /* Charcoal escuro (fundo fallback) */
+    --header-bg: #1A1A1A; /* Mesmo tom quente do header original */
+    --section-bg: rgba(26, 26, 26, 0.95); /* Fundo das seções com transparência */
+    --section-hover-bg: rgba(26, 26, 26, 1);
+    --text-color: #F2F2F2; /* Texto claro */
+    --text-secondary: #BBB; /* Texto secundário mais suave */
+    --shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+    --border-radius: 0; /* Sem bordas arredondadas para um look moderno */
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -22,7 +23,7 @@
 
 body {
     font-family: 'Lora', serif;
-    background-image: url('gothic-bg.jpg'); /* Substitua por sua imagem */
+    background-image: url('gothic-bg.jpg'); /* Substitua por sua imagem gótica */
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -31,7 +32,6 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    overflow-x: hidden;
     animation: fadeIn 1s ease;
 }
 
@@ -41,22 +41,22 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes slideFade {
-    from { opacity: 0; transform: translateX(20px); }
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(-20px); }
     to { opacity: 1; transform: translateX(0); }
 }
 
 /* Cabeçalho */
 header {
-    background: var(--card-bg);
-    padding: 1rem;
+    background: var(--header-bg);
+    padding: 1.2rem 1rem;
     text-align: center;
     box-shadow: var(--shadow);
     animation: fadeIn 0.8s ease;
 }
 
 header .logo {
-    max-height: 70px;
+    max-height: 60px;
     width: auto;
     transition: var(--transition);
 }
@@ -68,7 +68,7 @@ header .logo:hover {
 nav ul {
     display: flex;
     justify-content: center;
-    gap: 1.2rem;
+    gap: 1.5rem;
     flex-wrap: nowrap;
     overflow-x: auto;
     padding: 0.5rem 0;
@@ -82,25 +82,23 @@ nav a {
     font-size: 1.1rem;
     font-weight: 500;
     padding: 0.5rem 1rem;
-    border-radius: 8px;
     transition: var(--transition);
-    will-change: transform, background;
+    will-change: transform, color;
 }
 
 nav a:hover, nav a.ativo {
-    background: var(--secondary-color);
     color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
     transform: scale(1.05);
 }
 
 /* Banner Carrossel */
 .banner-carousel {
-    position: relative;
-    max-width: 900px;
+    max-width: 1200px;
     margin: 1rem auto;
+    position: relative;
     overflow: hidden;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
+    background: var(--section-bg);
     display: none;
     animation: fadeIn 0.8s ease;
 }
@@ -111,35 +109,36 @@ nav a:hover, nav a.ativo {
 
 .banner-slide {
     display: none;
-    text-align: center;
     padding: 2rem;
-    background: var(--card-bg);
+    text-align: center;
     transition: opacity 0.5s ease;
 }
 
 .banner-slide.active {
     display: block;
-    animation: slideFade 0.5s ease;
+    animation: slideIn 0.5s ease;
 }
 
 .banner-image {
     max-width: 100%;
-    height: 200px;
+    height: 250px;
     object-fit: cover;
-    border-radius: 8px;
     margin-bottom: 1rem;
+    border-bottom: 2px solid var(--primary-color);
 }
 
 .banner-title {
     font-family: 'Cinzel', serif;
-    font-size: 1.8rem;
+    font-size: 2rem;
     color: var(--primary-color);
     margin-bottom: 0.5rem;
 }
 
 .banner-text {
-    font-size: 1rem;
+    font-size: 1.1rem;
     color: var(--text-color);
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .banner-controls {
@@ -155,10 +154,10 @@ nav a:hover, nav a.ativo {
     background: var(--secondary-color);
     color: var(--text-color);
     border: none;
-    padding: 0.5rem 1rem;
+    padding: 0.6rem 1.2rem;
     cursor: pointer;
+    font-size: 1.3rem;
     transition: var(--transition);
-    font-size: 1.2rem;
 }
 
 .banner-prev:hover, .banner-next:hover {
@@ -174,8 +173,8 @@ body.modo-foco #resenhas {
 }
 
 #resenha-detalhe {
-    padding: 2rem;
-    background: var(--card-bg);
+    padding: 2rem 1rem;
+    background: var(--section-bg);
     color: var(--text-color);
     min-height: 100vh;
     display: flex;
@@ -192,12 +191,11 @@ body.modo-foco #resenhas {
     background: var(--secondary-color);
     color: var(--text-color);
     border: none;
-    padding: 0.7rem 1.5rem;
-    border-radius: 8px;
-    cursor: pointer;
+    padding: 0.8rem 1.6rem;
     font-family: 'Cinzel', serif;
-    font-size: 1rem;
+    font-size: 1.1rem;
     margin-bottom: 1.5rem;
+    cursor: pointer;
     transition: var(--transition);
 }
 
@@ -206,47 +204,53 @@ body.modo-foco #resenhas {
     transform: translateY(-2px);
 }
 
+#conteudo-detalhe {
+    max-width: 800px;
+    width: 100%;
+}
+
 #conteudo-detalhe h2 {
     font-family: 'Cinzel', serif;
     color: var(--primary-color);
-    font-size: 2rem;
+    font-size: 2.2rem;
     margin-bottom: 1rem;
+    text-align: center;
 }
 
 #conteudo-detalhe p {
-    max-width: 700px;
     font-size: 1.1rem;
     line-height: 1.8;
+    text-align: left;
 }
 
 /* Resenhas */
 main {
-    max-width: 900px;
+    max-width: 1200px;
     margin: 2rem auto;
-    padding: 1rem;
+    padding: 0 1rem;
 }
 
 .resenha {
-    background: var(--card-bg);
-    border-radius: var(--border-radius);
+    background: var(--section-bg);
     padding: 1.5rem;
-    margin-bottom: 1.5rem;
-    box-shadow: var(--shadow);
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--primary-color);
     transition: var(--transition);
     cursor: pointer;
-    animation: fadeIn 0.6s ease;
+    width: 100%;
+    animation: slideIn 0.6s ease;
 }
 
 .resenha:hover, .resenha:focus {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 32px rgba(220, 20, 60, 0.3);
-    background: var(--card-hover-bg);
+    background: var(--section-hover-bg);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow);
 }
 
 .resenha h2 {
     font-family: 'Cinzel', serif;
     color: var(--primary-color);
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     margin-bottom: 0.5rem;
 }
 
@@ -258,23 +262,19 @@ main {
 
 /* Rodapé */
 footer {
-    background: var(--card-bg);
-    color: var(--text-color);
+    background: var(--header-bg);
+    color: var(--text-secondary);
     text-align: center;
     padding: 1.5rem;
-    box-shadow: var(--shadow);
     font-size: 0.9rem;
     margin-top: 2rem;
-}
-
-footer p {
-    opacity: 0.9;
+    box-shadow: var(--shadow);
 }
 
 /* Responsividade */
 @media (max-width: 768px) {
     header {
-        padding: 0.8rem;
+        padding: 1rem 0.8rem;
     }
 
     header .logo {
@@ -282,8 +282,9 @@ footer p {
     }
 
     nav ul {
-        gap: 0.8rem;
-        padding: 0.4rem 0;
+        gap: 1rem;
+        padding: 0.5rem;
+        justify-content: flex-start;
     }
 
     nav a {
@@ -296,20 +297,23 @@ footer p {
     }
 
     .banner-image {
-        height: 150px;
+        height: 180px;
     }
 
     .banner-title {
-        font-size: 1.5rem;
+        font-size: 1.6rem;
+    }
+
+    .banner-text {
+        font-size: 1rem;
     }
 
     .resenha {
-        padding: 1rem;
-        margin-bottom: 1rem;
+        padding: 1.2rem;
     }
 
     .resenha h2 {
-        font-size: 1.4rem;
+        font-size: 1.5rem;
     }
 
     .resenha p {
@@ -326,8 +330,16 @@ footer p {
 }
 
 @media (max-width: 480px) {
+    header {
+        padding: 0.8rem 0.5rem;
+    }
+
+    header .logo {
+        max-height: 40px;
+    }
+
     nav ul {
-        justify-content: flex-start;
+        gap: 0.8rem;
     }
 
     nav a {
@@ -336,14 +348,39 @@ footer p {
     }
 
     .banner-image {
-        height: 120px;
+        height: 140px;
     }
 
     .banner-title {
-        font-size: 1.3rem;
+        font-size: 1.4rem;
     }
 
     .banner-text {
         font-size: 0.9rem;
+    }
+
+    .resenha {
+        padding: 1rem;
+    }
+
+    .resenha h2 {
+        font-size: 1.3rem;
+    }
+
+    .resenha p {
+        font-size: 0.9rem;
+    }
+
+    #fechar-resenha {
+        padding: 0.6rem 1.2rem;
+        font-size: 1rem;
+    }
+
+    #conteudo-detalhe h2 {
+        font-size: 1.6rem;
+    }
+
+    #conteudo-detalhe p {
+        font-size: 0.95rem;
     }
 }

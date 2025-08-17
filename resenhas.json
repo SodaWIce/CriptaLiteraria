@@ -1,14 +1,23 @@
 [
     {
-        "titulo": "Livro Exemplo 1",
-        "autor": "Autor",
+        "titulo": "Drácula",
+        "autor": "Bram Stoker",
         "categoria": "Clássicos",
-        "resumo": "Resumo Exemplo 1."
+        "resumo": "Um romance gótico sobre o lendário vampiro.",
+        "textoCompleto": "Drácula é uma obra-prima do terror gótico, explorando temas de medo e sedução..."
     },
     {
-        "titulo": "Livro Exemplo 2",
-        "autor": "Autor",
+        "titulo": "A Casa dos Pesadelos",
+        "autor": "Autor Nacional",
+        "categoria": "Autores Nacionais",
+        "resumo": "Uma história arrepiante de uma casa amaldiçoada.",
+        "textoCompleto": "Este livro mergulha o leitor em uma narrativa de suspense psicológico..."
+    },
+    {
+        "titulo": "O Chamado do Monstro",
+        "autor": "Novo Autor",
         "categoria": "Lançamentos",
-        "resumo": "Resumo Exemplo 2."
+        "resumo": "Um lançamento de 2025 que mistura terror e fantasia.",
+        "textoCompleto": "Uma obra inovadora que redefine o gênero de terror..."
     }
 ]
