@@ -22,12 +22,8 @@
 }
 
 body {
-    font-family: 'Comic Neue', 'Bangers', sans-serif; /* Playful, cartoonish font */
-    background-image: linear-gradient(to bottom, #EDE6D7, #D9D2C3); /* Soft gradient */
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    background-color: var(--bg-color);
+    font-family: 'Comic Neue', 'Bangers', sans-serif;
+    background-color: var(--bg-color); /* Solid #EDE6D7 */
     color: var(--text-color);
     min-height: 100vh;
     display: flex;
