@@ -28,7 +28,17 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    animation: bounceIn 1s ease;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Definindo a animação de fade leve */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 /* Animações */
@@ -51,7 +61,6 @@ header {
     text-align: center;
     box-shadow: var(--shadow);
     width: 100%;
-    animation: bounceIn 0.8s ease;
     /* Removed border-radius and border for full-width effect */
 }
 
@@ -106,7 +115,6 @@ nav a:hover, nav a.ativo {
     overflow: hidden;
     background: var(--section-bg);
     display: none;
-    animation: bounceIn 0.8s ease;
     /* Removed border and border-radius for full-width effect */
 }
 
