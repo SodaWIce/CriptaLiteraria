@@ -117,7 +117,7 @@ nav a:hover, nav a.ativo {
 
 .banner-slide {
     display: none;
-    padding: 2.5rem 2rem;
+    padding: 0;
     text-align: center;
     transition: opacity 0.5s ease;
 }
@@ -139,6 +139,7 @@ nav a:hover, nav a.ativo {
     margin-bottom: 0;
 }
 
+/* Regras mantidas por enquanto, mas podem ser removidas se o banner for apenas imagens */
 .banner-title {
     font-family: 'Bangers', sans-serif;
     font-size: 2.5rem;
@@ -172,132 +173,6 @@ nav a:hover, nav a.ativo {
     border-radius: 50%;
     cursor: pointer;
     transition: var(--transition);
-}
-
-.banner-indicator.active {
-    background: var(--primary-color);
-    transform: scale(1.3);
-}
-
-/* Responsividade */
-@media (max-width: 768px) {
-    .banner-slide {
-        padding: 2rem 1.5rem;
-    }
-
-    .banner-title {
-        font-size: 2rem;
-    }
-
-    .banner-text {
-        font-size: 1rem;
-        max-width: 90%;
-    }
-
-    .banner-indicators {
-        bottom: 8px;
-        gap: 6px;
-    }
-
-    .banner-indicator {
-        width: 8px;
-        height: 8px;
-    }
-}
-
-@media (max-width: 480px) {
-    .banner-slide {
-        padding: 1.5rem 1rem;
-    }
-
-    .banner-slide {
-        opacity: 0;
-        transition: opacity 0.5s ease-in-out;
-    }
-    .banner-slide.active {
-        opacity: 1;
-    }
-
-    .banner-title {
-        font-size: 1.6rem;
-    }
-
-    .banner-text {
-        font-size: 0.95rem;
-    }
-
-    .banner-indicators {
-        bottom: 6px;
-        gap: 5px;
-    }
-
-    .banner-indicator {
-        width: 6px;
-        height: 6px;
-    }
-}
-
-.banner-indicator.active {
-    background: var(--primary-color);
-    transform: scale(1.3);
-}
-
-/* Responsividade */
-@media (max-width: 768px) {
-    .banner-slide {
-        padding: 2rem 1.5rem;
-    }
-
-    .banner-title {
-        font-size: 2rem;
-    }
-
-    .banner-text {
-        font-size: 1rem;
-        max-width: 90%;
-    }
-
-    .banner-indicators {
-        bottom: calc(2rem + 1.2rem + 8px); /* Ajustado para padding-bottom menor */
-        gap: 6px;
-    }
-
-    .banner-indicator {
-        width: 8px;
-        height: 8px;
-    }
-}
-
-@media (max-width: 480px) {
-    .banner-slide {
-        padding: 1.5rem 1rem;
-    }
-
-    .banner-slide {
-        opacity: 0;
-        transition: opacity 0.5s ease-in-out;
-    }
-    .banner-slide.active {
-        opacity: 1;
-    }
-
-    .banner-title {
-        font-size: 1.6rem;
-    }
-
-    .banner-text {
-        font-size: 0.95rem;
-    }
-
-    .banner-indicators {
-        bottom: calc(1.5rem + 1.2rem + 6px); /* Ajustado para padding-bottom menor */
-        gap: 5px;
-    }
-
-    .banner-indicator {
-        width: 6px;
-        height: 6px;
-    }
 }
 
 .banner-indicator.active {
@@ -372,7 +247,7 @@ body.modo-foco #resenhas {
 /* Resenhas */
 main {
     max-width: 1200px;
-    margin: 1.5rem auto;
+    margin: 0.5rem auto;
     padding: 0 1rem;
 }
 
@@ -443,7 +318,7 @@ footer {
     }
 
     .banner-slide {
-        padding: 2rem 1.5rem;
+        padding: 0;
     }
 
     .banner-title {
@@ -456,7 +331,7 @@ footer {
     }
 
     .banner-indicators {
-        bottom: 8px;
+        bottom: calc(2rem + 1.2rem + 8px);
         gap: 6px;
     }
 
@@ -487,13 +362,11 @@ footer {
     }
 
     .banner-slide {
-        padding: 1.5rem 1rem;
-    }
-
-    .banner-slide {
+        padding: 0;
         opacity: 0;
         transition: opacity 0.5s ease-in-out;
     }
+
     .banner-slide.active {
         opacity: 1;
     }
@@ -507,7 +380,7 @@ footer {
     }
 
     .banner-indicators {
-        bottom: 6px;
+        bottom: calc(1.5rem + 1.2rem + 6px);
         gap: 5px;
     }
 
